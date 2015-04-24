@@ -1,6 +1,5 @@
 # ProjetJava
-ProjetJava
-Projet Java
+ProjetJava L3 STRI 2014/2015
 ##Sujet
 La société STRI souhaite mettre en place un service de gestion d’appareils connecté à son réseau (Ordinateurs, tablettes, 
 routeurs). La société possède plusieurs locaux, et chaque local possède plusieurs salles.
