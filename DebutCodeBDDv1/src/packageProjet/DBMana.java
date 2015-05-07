@@ -150,7 +150,32 @@ public class DBMana {
 				
 			}
 		
+		
+		public static boolean checkID(){
+			try{
+				cnx=connectDB();
+				stat=cnx.createStatement();
+				String DBlog="";
+				String DBpass="";
+				String Userlog = "Manu";
+				String Userpass = "mouhaha";
+				String query = "SELECT * FROM Users;";
+				rst = stat.executeQuery(query);
+				boolean testlogs = false;
+				while(rst.next() && !testlogs){
+					DBlog=rst.getString(1);
+					DBpass=rst.getString(2);
+					testlogs = (Userlog.equals(DBlog) && Userpass.equals(DBpass));
+				}		
+				stat.close();
+				return testlogs;
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+				return false;
+			}		
 			
+		}
 	}
 		
 		
