@@ -1,4 +1,4 @@
-package package_v1;
+package package_v2;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +17,7 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
      */
     public JFChoiceViewManag() {
         initComponents();
+        this.setResizable(false);
     }
 
     /**
@@ -50,8 +51,7 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
 
         jButton1.setText("Quitter");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ajout.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addPc.png"))); // NOI18N
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vision.png"))); // NOI18N
 
@@ -104,7 +104,9 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
 
     private void jBNetConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNetConfigActionPerformed
         // TODO add your handling code here:
-       
+       JFConfig frameConf = new JFConfig();
+       this.setVisible(false);
+       frameConf.setVisible(true);
     }//GEN-LAST:event_jBNetConfigActionPerformed
 
     /**

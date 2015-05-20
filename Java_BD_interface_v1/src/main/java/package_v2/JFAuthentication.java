@@ -1,4 +1,4 @@
-package package_v1;
+package package_v2;
 
 
 import java.awt.Color;
@@ -139,13 +139,33 @@ public class JFAuthentication extends javax.swing.JFrame {
 
     private void jBOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOKActionPerformed
         // TODO add your handling code here:
-        if ("".equals(this.jTId.getText())){
-            this.jLerr.setText("Vous avez oublié de remplir le champs identifiant");
+        if (("".equals(this.jTId.getText()))||("".equals(this.jTPwd.getText()))){
+            this.jLerr.setText("Vous avez oublié de remplir un champs");
             this.jLerr.setVisible(true);
         }
         else{
             this.jLerr.setText("autre erreur");
             this.jLerr.setVisible(true);
+        }
+        String id = "Test";
+        String pwd = "pass";
+        String idOK = jTId.getText();
+        String pwdOK = jTPwd.getText();
+        if(idOK.equals(id)){
+            System.out.println("ok id");
+            if(pwdOK.equals(pwd)){
+                System.out.println("ok pwd");
+                JFChoiceViewManag frameChoice = new JFChoiceViewManag();
+                frameChoice.setVisible(true);
+                this.setVisible(false);
+                //Boss.closeWin();
+            }
+            else{
+                System.out.println("erreur pwd");
+            }
+        }
+        else{
+            System.out.println("erreur id");
         }
     }//GEN-LAST:event_jBOKActionPerformed
 

@@ -1,0 +1,56 @@
+CREATE DATABASE TPjava character set 'utf8';
+
+CREATE TABLE Constructeurs(
+ConstrName VARCHAR(32) NOT NULL, 
+IDCard VARCHAR(16), 
+PRIMARY KEY (ConstName));
+
+CREATE TABLE Devices(
+Name VARCHAR(32) NOT NULL, 
+Type VARCHAR(32), 
+OS VARCHAR(16), 
+NetworkCard VARCHAR(32), 
+NumRoom INT(11), 
+PRIMARY KEY (Name));
+
+CREATE TABLE IntercoDev(
+InterCoDevName VARCHAR(32) NOT NULL, 
+OS VARCHAR(32), 
+FW VARCHAR(32),  
+NumRoom INT(11), 
+PRIMARY KEY (Name));
+
+CREATE TABLE NetworkCards(
+DevName VARCHAR(32) NOT NULL, 
+IDcard VARCHAR(32), 
+Constr VARCHAR(32), 
+PRIMARY KEY (DevName));
+
+CREATE TABLE Rooms(
+Site VARCHAR(32) NOT NULL, 
+NumRoom INT(11) NOT NULL,
+Type VARCHAR(32) NOT NULL,
+NbDevices INT(11),
+NbIntercoDev INT(11), 
+PRIMARY KEY (Site,NumRoom));
+
+CREATE TABLE Sites(
+SiteName VARCHAR(32) NOT NULL, 
+Address VARCHAR(32) NOT NULL, 
+NbRoom INT(11), 
+PRIMARY KEY (SiteName));
+
+CREATE TABLE Users(
+Login VARCHAR(32) NOT NULL, 
+Pass VARCHAR(32) NOT NULL, 
+PRIMARY KEY (Login));
+
+
+
+
+
+
+
+
+
+
