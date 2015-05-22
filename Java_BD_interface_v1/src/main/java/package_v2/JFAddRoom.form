@@ -29,30 +29,35 @@
                       <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLAdd" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="jImgAddSIte" min="-2" max="-2" attributes="0"/>
+                          <Component id="jImgAddRoom" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButtonOk" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonAddRoom" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLNumRoom" min="-2" max="-2" attributes="0"/>
                           <Component id="jLSiteName" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLSiteAddr" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLTypeRoom" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBox1" max="32767" attributes="0"/>
-                          <Component id="jComboBox2" max="32767" attributes="0"/>
-                          <Component id="jTSiteName" max="32767" attributes="0"/>
+                          <Component id="selectSite" max="32767" attributes="0"/>
+                          <Component id="selectType" max="32767" attributes="0"/>
+                          <Component id="jTNumRoom" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+              <Component id="jLerr" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,24 +67,26 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLAdd" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jImgAddSIte" min="-2" max="-2" attributes="0"/>
+              <Component id="jImgAddRoom" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="jLerr" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="26" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="selectSite" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLSiteName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLSiteAddr" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="selectType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLTypeRoom" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTSiteName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTNumRoom" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLNumRoom" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="jButtonOk" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonAddRoom" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -96,41 +103,41 @@
         <Property name="text" type="java.lang.String" value="Local : "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLSiteAddr">
+    <Component class="javax.swing.JLabel" name="jLTypeRoom">
       <Properties>
         <Property name="text" type="java.lang.String" value="Type de la salle"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTSiteName">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTSiteNameActionPerformed"/>
-      </Events>
+    <Component class="javax.swing.JTextField" name="jTNumRoom">
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonOk">
+    <Component class="javax.swing.JButton" name="jButtonAddRoom">
       <Properties>
         <Property name="text" type="java.lang.String" value="Valider"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddRoomActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jImgAddSIte">
+    <Component class="javax.swing.JLabel" name="jImgAddRoom">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/addRoom.png"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="selectSite">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLNumRoom">
       <Properties>
         <Property name="text" type="java.lang.String" value="Num&#xe9;ro de salle : "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
+    <Component class="javax.swing.JComboBox" name="selectType">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -140,6 +147,11 @@
             <StringItem index="3" value="Cours"/>
           </StringArray>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLerr">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Texte d&apos;erreur"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package package_v2;
+import java.awt.Color;
+import javax.swing.DefaultComboBoxModel;
 
 
 /**
@@ -18,6 +20,12 @@ public class JFAddRoom extends javax.swing.JFrame {
     public JFAddRoom() {
         initComponents();
         this.setResizable(false);
+        this.jLerr.setVisible(false);
+        this.jLerr.setForeground(Color.red);
+        DefaultComboBoxModel listSite = new DefaultComboBoxModel();
+        listSite=DBMana.selectDBSite(listSite);
+        selectSite.setModel(listSite);
+        
     }
 
     /**
@@ -31,13 +39,14 @@ public class JFAddRoom extends javax.swing.JFrame {
 
         jLAdd = new javax.swing.JLabel();
         jLSiteName = new javax.swing.JLabel();
-        jLSiteAddr = new javax.swing.JLabel();
-        jTSiteName = new javax.swing.JTextField();
-        jButtonOk = new javax.swing.JButton();
-        jImgAddSIte = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jLTypeRoom = new javax.swing.JLabel();
+        jTNumRoom = new javax.swing.JTextField();
+        jButtonAddRoom = new javax.swing.JButton();
+        jImgAddRoom = new javax.swing.JLabel();
+        selectSite = new javax.swing.JComboBox();
+        jLNumRoom = new javax.swing.JLabel();
+        selectType = new javax.swing.JComboBox();
+        jLerr = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,21 +54,22 @@ public class JFAddRoom extends javax.swing.JFrame {
 
         jLSiteName.setText("Local : ");
 
-        jLSiteAddr.setText("Type de la salle");
+        jLTypeRoom.setText("Type de la salle");
 
-        jTSiteName.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddRoom.setText("Valider");
+        jButtonAddRoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTSiteNameActionPerformed(evt);
+                jButtonAddRoomActionPerformed(evt);
             }
         });
 
-        jButtonOk.setText("Valider");
+        jImgAddRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addRoom.png"))); // NOI18N
 
-        jImgAddSIte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addRoom.png"))); // NOI18N
+        jLNumRoom.setText("Numéro de salle : ");
 
-        jLabel1.setText("Numéro de salle : ");
+        selectType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TP Réseau", "TP Informatique", "Serveur", "Cours" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TP Réseau", "TP Informatique", "Serveur", "Cours" }));
+        jLerr.setText("Texte d'erreur");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,23 +81,27 @@ public class JFAddRoom extends javax.swing.JFrame {
                         .addGap(158, 158, 158)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jImgAddSIte)))
+                            .addComponent(jImgAddRoom)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonOk))
+                        .addComponent(jButtonAddRoom))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jLNumRoom)
                             .addComponent(jLSiteName)
-                            .addComponent(jLSiteAddr))
+                            .addComponent(jLTypeRoom))
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTSiteName))
+                            .addComponent(selectSite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTNumRoom))
                         .addGap(32, 32, 32)))
                 .addGap(67, 67, 67))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addComponent(jLerr)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,30 +109,57 @@ public class JFAddRoom extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jImgAddSIte)
+                .addComponent(jImgAddRoom)
+                .addGap(34, 34, 34)
+                .addComponent(jLerr)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectSite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLSiteName))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLSiteAddr))
+                    .addComponent(selectType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLTypeRoom))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTSiteName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jTNumRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLNumRoom))
                 .addGap(32, 32, 32)
-                .addComponent(jButtonOk)
+                .addComponent(jButtonAddRoom)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTSiteNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSiteNameActionPerformed
+    private void jButtonAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddRoomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTSiteNameActionPerformed
+        String roomNum = this.jTNumRoom.getText();
+        String siteName = (String)this.selectSite.getSelectedItem();
+        String roomType = (String)this.selectType.getSelectedItem();
+        
+        if(("".equals(roomNum))){
+            this.jLerr.setText("Vous avez oublié de remplir un champs");
+            this.jLerr.setVisible(true);
+        }
+        else{
+            //test nom salle non existant
+            boolean exist = DBMana.roomExist(roomNum, siteName);
+            if(!exist){
+                this.jLerr.setText("La salle "+roomNum+" existe déjà");
+                this.jLerr.setVisible(true);
+            }
+            else{
+                Room room = new Room (siteName, roomNum, roomType);
+                DBMana.AddDBRoom(room);
+                this.jLerr.setVisible(false);
+                JFAddOk addOk = new JFAddOk("salle", "ajoutée");
+                addOk.setVisible(true);
+                this.setVisible(false);
+            }
+            
+        }
+    }//GEN-LAST:event_jButtonAddRoomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,14 +200,15 @@ public class JFAddRoom extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonOk;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jImgAddSIte;
+    private javax.swing.JButton jButtonAddRoom;
+    private javax.swing.JLabel jImgAddRoom;
     private javax.swing.JLabel jLAdd;
-    private javax.swing.JLabel jLSiteAddr;
+    private javax.swing.JLabel jLNumRoom;
     private javax.swing.JLabel jLSiteName;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTSiteName;
+    private javax.swing.JLabel jLTypeRoom;
+    private javax.swing.JLabel jLerr;
+    private javax.swing.JTextField jTNumRoom;
+    private javax.swing.JComboBox selectSite;
+    private javax.swing.JComboBox selectType;
     // End of variables declaration//GEN-END:variables
 }

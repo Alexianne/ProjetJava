@@ -5,6 +5,8 @@
  */
 package package_v2;
 
+import java.awt.Color;
+
 
 /**
  *
@@ -18,6 +20,8 @@ public class JFAddSite extends javax.swing.JFrame {
     public JFAddSite() {
         initComponents();
         this.setResizable(false);
+        this.jLerr.setVisible(false);
+        this.jLerr.setForeground(Color.red);
     }
 
     /**
@@ -35,7 +39,8 @@ public class JFAddSite extends javax.swing.JFrame {
         jTSiteName = new javax.swing.JTextField();
         jTSiteAddr = new javax.swing.JTextField();
         jButtonOk = new javax.swing.JButton();
-        jImgAddSIte = new javax.swing.JLabel();
+        jImgAddSite = new javax.swing.JLabel();
+        jLerr = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,38 +50,43 @@ public class JFAddSite extends javax.swing.JFrame {
 
         jLSiteAddr.setText("Adresse : ");
 
-        jTSiteName.addActionListener(new java.awt.event.ActionListener() {
+        jButtonOk.setText("Valider");
+        jButtonOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTSiteNameActionPerformed(evt);
+                jButtonOkActionPerformed(evt);
             }
         });
 
-        jButtonOk.setText("Valider");
+        jImgAddSite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addSite.png"))); // NOI18N
 
-        jImgAddSIte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addSite.png"))); // NOI18N
+        jLerr.setText("Text d'erreur");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonOk)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLSiteName)
-                                .addComponent(jLSiteAddr))
-                            .addGap(37, 37, 37)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTSiteName, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                                .addComponent(jTSiteAddr)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(158, 158, 158)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jImgAddSIte)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButtonOk)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLSiteName)
+                                    .addComponent(jLSiteAddr))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTSiteName, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                                    .addComponent(jTSiteAddr)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(158, 158, 158)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jImgAddSite)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLerr)))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,8 +95,10 @@ public class JFAddSite extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jImgAddSIte, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 26, Short.MAX_VALUE)
+                .addComponent(jImgAddSite, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jLerr)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLSiteName)
                     .addComponent(jTSiteName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -102,9 +114,23 @@ public class JFAddSite extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTSiteNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSiteNameActionPerformed
+    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTSiteNameActionPerformed
+        String siteName = this.jTSiteName.getText();
+        String siteAddr = this.jTSiteAddr.getText();
+        if(("".equals(siteName))||("".equals(siteAddr))){
+            this.jLerr.setText("Vous avez oublié de remplir un champs");
+            this.jLerr.setVisible(true);
+        }
+        else{
+            Site site = new Site (siteName,siteAddr);
+            DBMana.AddDBSite(site);
+            this.jLerr.setVisible(false);
+            JFAddOk addOk = new JFAddOk("local", "ajouté");
+            addOk.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jButtonOkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,10 +170,11 @@ public class JFAddSite extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonOk;
-    private javax.swing.JLabel jImgAddSIte;
+    private javax.swing.JLabel jImgAddSite;
     private javax.swing.JLabel jLAdd;
     private javax.swing.JLabel jLSiteAddr;
     private javax.swing.JLabel jLSiteName;
+    private javax.swing.JLabel jLerr;
     private javax.swing.JTextField jTSiteAddr;
     private javax.swing.JTextField jTSiteName;
     // End of variables declaration//GEN-END:variables

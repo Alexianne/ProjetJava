@@ -2,14 +2,14 @@ package package_v2;
 
 public class Room {
     private String siteName;
-    private int nbRoom;
+    private String nbRoom;
     private String type;
     private int nbIntercoDev;
     private int nbDevices;
     
     
     //Constructor
-    public Room(String siteName, int nbRoom, String type){
+    public Room(String siteName, String nbRoom, String type){
         this.setSiteName(siteName);
         this.setNbRoom(nbRoom);
         this.setType(type);
@@ -28,12 +28,12 @@ public class Room {
 	}
 
 
-	public int getNbRoom() {
+	public String getNbRoom() {
 		return nbRoom;
 	}
 
 
-	public void setNbRoom(int nbRoom) {
+	public void setNbRoom(String nbRoom) {
 		this.nbRoom = nbRoom;
 	}
 

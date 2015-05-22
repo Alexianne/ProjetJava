@@ -1,5 +1,8 @@
 CREATE DATABASE TPjava character set 'utf8';
 
+CREATE USER 'test'@'localhost' IDENTIFIED BY 'pass';
+GRANT ALL PRIVILEGES ON * . * TO 'test'@'localhost';
+
 CREATE TABLE Constructeurs(
 Name VARCHAR(32) NOT NULL, 
 IDCard VARCHAR(16), 
