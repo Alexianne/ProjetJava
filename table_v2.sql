@@ -1,43 +1,49 @@
-CREATE DATABASE TPjava character set 'utf8';
+CREATE DATABASE TPjava2 character set 'utf8';
+USE TPjava2;
 
 CREATE TABLE Constructeurs(
 ConstrName VARCHAR(32) NOT NULL, 
-IDCard VARCHAR(16), 
-PRIMARY KEY (ConstName));
+IDCard VARCHAR(16) NOT NULL, 
+PRIMARY KEY (ConstrName));
 
 CREATE TABLE Devices(
-Name VARCHAR(32) NOT NULL, 
-Type VARCHAR(32), 
+DevName VARCHAR(32) NOT NULL, 
+TypeDev VARCHAR(32), 
 OS VARCHAR(16), 
-NetworkCard VARCHAR(32), 
+SiteName VARCHAR(32),
 NumRoom INT(11), 
-PRIMARY KEY (Name));
+PRIMARY KEY (DevName));
 
 CREATE TABLE IntercoDev(
 InterCoDevName VARCHAR(32) NOT NULL, 
+TypeIntercoDev VARCHAR(32),
 OS VARCHAR(32), 
-FW VARCHAR(32),  
+SiteName VARCHAR(32),
 NumRoom INT(11), 
-PRIMARY KEY (Name));
+PRIMARY KEY (IntercoDevName));
+
+CREATE TABLE Interfaces(
+IntName VARCHAR(32),
+InterCoDevName VARCHAR(32),
+IpAddr VARCHAR(32), 
+PRIMARY KEY (IntName,IntercoDevName));
 
 CREATE TABLE NetworkCards(
 DevName VARCHAR(32) NOT NULL, 
-IDcard VARCHAR(32), 
-Constr VARCHAR(32), 
-PRIMARY KEY (DevName));
+IntercoDevName VARCHAR(32),
+MacAddr VARCHAR(32), 
+IpAddr VARCHAR(32), 
+PRIMARY KEY (MacAddr));
 
 CREATE TABLE Rooms(
-Site VARCHAR(32) NOT NULL, 
+SiteName VARCHAR(32) NOT NULL, 
 NumRoom INT(11) NOT NULL,
-Type VARCHAR(32) NOT NULL,
-NbDevices INT(11),
-NbIntercoDev INT(11), 
-PRIMARY KEY (Site,NumRoom));
+TypeRoom VARCHAR(32) NOT NULL,
+PRIMARY KEY (SiteName,NumRoom));
 
 CREATE TABLE Sites(
 SiteName VARCHAR(32) NOT NULL, 
 Address VARCHAR(32) NOT NULL, 
-NbRoom INT(11), 
 PRIMARY KEY (SiteName));
 
 CREATE TABLE Users(
@@ -45,8 +51,17 @@ Login VARCHAR(32) NOT NULL,
 Pass VARCHAR(32) NOT NULL, 
 PRIMARY KEY (Login));
 
+ALTER TABLE Rooms ADD CONSTRAINT fk_room_site FOREIGN KEY (SiteName) REFERENCES Sites (SiteName);
 
+ALTER TABLE Devices ADD CONSTRAINT fk_dev_room FOREIGN KEY (SiteName,NumRoom) REFERENCES Rooms (SiteName,NumRoom);
 
+ALTER TABLE IntercoDev ADD CONSTRAINT fk_intercodev_room FOREIGN KEY (SiteName,NumRoom) REFERENCES Rooms (SiteName,NumRoom);
+
+ALTER TABLE Interfaces ADD CONSTRAINT fk_int_intercodev FOREIGN KEY (IntercoDevName) REFERENCES IntercoDev (IntercoDevName);
+
+ALTER TABLE NetworkCards ADD CONSTRAINT fk_card_intercodev FOREIGN KEY (IntercoDevName) REFERENCES IntercoDev (IntercoDevName);
+
+ALTER TABLE NetworkCards ADD CONSTRAINT fk_card_dev FOREIGN KEY (DevName) REFERENCES Devices (DevName);
 
 
 

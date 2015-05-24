@@ -220,6 +220,27 @@ public class DBMana {
             return false;
 	}
     }
+
+public static DefaultComboBoxModel selectDBRoom(DefaultComboBoxModel listSite, String siteName) {
+         try{
+            String query = "SELECT NbRoom FROM Room WHERE Site='"+siteName+"'";
+            cnx = DBMana.connectDB();
+            stat=cnx.createStatement();
+            rst = stat.executeQuery(query);
+            String result = null;
+            while (rst.next())
+            {
+                result = rst.getString(1);
+                listSite.addElement(result);
+				   
+            }
+            return listSite;
+         }
+         catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+     }
 		
 		
 	
