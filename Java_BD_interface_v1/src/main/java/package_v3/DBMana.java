@@ -201,6 +201,44 @@ public class DBMana {
         }
     }
     
+
+    public static boolean intercoDevExist(String intercoDevName, String siteName, String roomNum) {
+        try{
+            cnx=DBMana.connectDB();
+            stat=cnx.createStatement();
+            String query = "SELECT COUNT(*) FROM IntercoDev WHERE SiteName='"+siteName+"' AND NumRoom='"+roomNum+"'";
+            rst = stat.executeQuery(query);
+            int result =0;
+            while (rst.next())
+            {
+                result = rst.getInt(1);
+            }
+            System.out.println(result);
+            if(result == 0){
+                return true;
+            }
+            else{
+                String query2 = "SELECT COUNT(*) FROM IntercoDev WHERE IntercoDevName='"+intercoDevName+"'";
+                rst = stat.executeQuery(query2);
+                int result2 =0;
+                while (rst.next())
+                {
+                   result2 = rst.getInt(1);
+                }
+                System.out.println(result2);
+                if(result2 == 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+	}
+    }
+	
+
     
     public static boolean checkID(String login, String pass) throws SQLException{
         String loginDB;
@@ -371,5 +409,5 @@ public class DBMana {
     
     
     
-    
+
 }

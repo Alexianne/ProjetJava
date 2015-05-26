@@ -65,7 +65,25 @@ ALTER TABLE NetworkCards ADD CONSTRAINT fk_card_dev FOREIGN KEY (DevName) REFERE
 
 
 
-
+INSERT INTO `Constructeurs` (`ConstrName`, `IDCard`) VALUES
+('3com', '00608C'),
+('American Research Corp', '405243'),
+('Apple', '080007'),
+('AT&T', '08006A'),
+('Cisco', '00000C'),
+('Fujitsu', '00000E'),
+('Fujitsu-Xerox', '080037'),
+('Hewlett-Packard', '080009'),
+('IBM', '08005A'),
+('Intel', '00AA00'),
+('Kinetics AppleTalk', '080089'),
+('Mitsubishi', '080070'),
+('Motorola', '08003E'),
+('Qualcomm Atheros', '00248C'),
+('Samsung', '0000F0'),
+('Sony', '080046'),
+('Synoptics', '000081'),
+('XIOS', '080080');
 
 
 

@@ -36,21 +36,21 @@ public class JFConfig extends javax.swing.JFrame {
         selectSite4.setModel(listSite_4);
         selectSite5.setModel(listSite_5);
         String siteName = (String)this.selectSite2.getSelectedItem();
-        DefaultComboBoxModel listSite2 = new DefaultComboBoxModel();
-        listSite2=DBMana.selectDBRoom(listSite2, siteName);
+        DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
+        listRoom=DBMana.selectDBRoom(listRoom, siteName);
         String siteName2 = (String)this.selectSite3.getSelectedItem();
-        DefaultComboBoxModel listSite3 = new DefaultComboBoxModel();
-        listSite3=DBMana.selectDBRoom(listSite3, siteName2);
+        DefaultComboBoxModel listRoom2 = new DefaultComboBoxModel();
+        listRoom2=DBMana.selectDBRoom(listRoom2, siteName2);
         String siteName3 = (String)this.selectSite4.getSelectedItem();
-        DefaultComboBoxModel listSite4 = new DefaultComboBoxModel();
-        listSite4=DBMana.selectDBRoom(listSite4, siteName3);
+        DefaultComboBoxModel listRoom3 = new DefaultComboBoxModel();
+        listRoom3=DBMana.selectDBRoom(listRoom3, siteName3);
         String siteName4 = (String)this.selectSite5.getSelectedItem();
-        DefaultComboBoxModel listSite5 = new DefaultComboBoxModel();
-        listSite5=DBMana.selectDBRoom(listSite5, siteName4);
-        selectRoom2.setModel(listSite2);
-        selectRoom3.setModel(listSite3);
-        selectRoom4.setModel(listSite4);
-        selectRoom5.setModel(listSite5);
+        DefaultComboBoxModel listRoom4 = new DefaultComboBoxModel();
+        listRoom4=DBMana.selectDBRoom(listRoom4, siteName4);
+        selectRoom2.setModel(listRoom);
+        selectRoom3.setModel(listRoom2);
+        selectRoom4.setModel(listRoom3);
+        selectRoom5.setModel(listRoom4);
     }
 
     /**
@@ -124,6 +124,11 @@ public class JFConfig extends javax.swing.JFrame {
         });
 
         jBAddDev.setText("Ajout Equipement d'interco");
+        jBAddDev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAddDevActionPerformed(evt);
+            }
+        });
 
         jBAddPc.setText("Ajout Equipement");
 
@@ -353,26 +358,34 @@ public class JFConfig extends javax.swing.JFrame {
     private void selectSite3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSite3ActionPerformed
         // TODO add your handling code here:
         String siteName = (String)this.selectSite3.getSelectedItem();
-        DefaultComboBoxModel listSite = new DefaultComboBoxModel();
-        listSite=DBMana.selectDBRoom(listSite, siteName);
-        selectRoom3.setModel(listSite);
+        DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
+        listRoom=DBMana.selectDBRoom(listRoom, siteName);
+        selectRoom3.setModel(listRoom);
     }//GEN-LAST:event_selectSite3ActionPerformed
 
     private void selectSite4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSite4ActionPerformed
         // TODO add your handling code here:
         String siteName = (String)this.selectSite4.getSelectedItem();
-        DefaultComboBoxModel listSite = new DefaultComboBoxModel();
-        listSite=DBMana.selectDBRoom(listSite, siteName);
-        selectRoom4.setModel(listSite);
+        DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
+        listRoom=DBMana.selectDBRoom(listRoom, siteName);
+        selectRoom4.setModel(listRoom);
     }//GEN-LAST:event_selectSite4ActionPerformed
 
     private void selectSite5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSite5ActionPerformed
         // TODO add your handling code here:
         String siteName = (String)this.selectSite5.getSelectedItem();
-        DefaultComboBoxModel listSite = new DefaultComboBoxModel();
-        listSite=DBMana.selectDBRoom(listSite, siteName);
-        selectRoom5.setModel(listSite);
+        DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
+        listRoom=DBMana.selectDBRoom(listRoom, siteName);
+        selectRoom5.setModel(listRoom);
     }//GEN-LAST:event_selectSite5ActionPerformed
+
+
+    private void jBAddDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddDevActionPerformed
+        // TODO add your handling code here:
+        JFAddIntercoDev frameAddIntercoDev = new JFAddIntercoDev();
+        this.setVisible(false);
+        frameAddIntercoDev.setVisible(true);
+    }//GEN-LAST:event_jBAddDevActionPerformed
 
     private void jBSupprCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprCardActionPerformed
       
@@ -395,6 +408,7 @@ public class JFConfig extends javax.swing.JFrame {
     private void selectNetCard5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNetCard5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_selectNetCard5ActionPerformed
+
 
     private void jBSupprSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprSiteActionPerformed
         String site = (String)this.selectSite1.getSelectedItem();
