@@ -30,6 +30,7 @@ PRIMARY KEY (IntName,IntercoDevName));
 
 CREATE TABLE NetworkCards(
 DevName VARCHAR(32) NOT NULL, 
+IntName VARCHAR(32),
 IntercoDevName VARCHAR(32),
 MacAddr VARCHAR(32), 
 IpAddr VARCHAR(32), 
@@ -59,7 +60,7 @@ ALTER TABLE IntercoDev ADD CONSTRAINT fk_intercodev_room FOREIGN KEY (SiteName,N
 
 ALTER TABLE Interfaces ADD CONSTRAINT fk_int_intercodev FOREIGN KEY (IntercoDevName) REFERENCES IntercoDev (IntercoDevName);
 
-ALTER TABLE NetworkCards ADD CONSTRAINT fk_card_intercodev FOREIGN KEY (IntercoDevName) REFERENCES IntercoDev (IntercoDevName);
+ALTER TABLE NetworkCards ADD CONSTRAINT fk_card_intercodev FOREIGN KEY (IntName,IntercoDevName) REFERENCES Interfaces (IntName,IntercoDevName);
 
 ALTER TABLE NetworkCards ADD CONSTRAINT fk_card_dev FOREIGN KEY (DevName) REFERENCES Devices (DevName);
 
