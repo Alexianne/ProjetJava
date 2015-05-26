@@ -1,6 +1,7 @@
 package package_v3;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -60,7 +61,112 @@ public class DBMana {
         }
     }
     
+  
+    // Avec le constructeur, cherche dans BDD et retourne le début de l'addr MAC
+    public String fetchDBMacAddrConstr(String maker){
+        String macAddress = "";
+        String query = "SELECT IDCard FROM Constructeurs WHERE ConstrName '"+maker+"'; ";
+        rst = DBMana.selectDB(query);
+        try {
+            
+            macAddress = rst.getString(1);
+            return macAddress;
+        } catch (SQLException ex) {
+            Logger.getLogger(NetworkCard.class.getName()).log(Level.SEVERE, null, ex);
+            return macAddress;
+        }
+    }
+    /*
+    public static Integer getDBNumRoom(String Site)  {
+        
+            String query = "SELECT NumRoom FROM Rooms WHERE SiteName='"+Site+"'";
+            rst = selectDB(query);
+            int result =0;
+            int cpt = getDBCountRoom(Site);
+        try {
+            while (rst.next())
+            {
+                result = rst.getInt(1);
+            }			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return result;
+        
+    }*/
     
+    public static Integer getDBCountRoom(String Site)  {
+        
+            String query = "SELECT COUNT(*) FROM Rooms WHERE SiteName='"+Site+"'";
+            rst = selectDB(query);
+            int result =0;
+        try {
+            result = rst.getInt(1);
+            			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return result;
+        
+    }
+    
+  
+            
+    public static Integer getDBNbRoom(Site site) {
+        
+            String query = "SELECT COUNT(*) FROM Rooms WHERE SiteName='"+site.getSiteName()+"'";
+            rst = selectDB(query);
+            int result =0;
+        try {
+            while (rst.next())
+            {
+                result = rst.getInt(1);
+            }			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return result;
+        
+    }
+    
+    public static ArrayList<Integer> getDBArrayNumRoom(String SiteName){
+        String query = "SELECT NumRoom FROM Rooms WHERE SiteName='"+SiteName+"' ;";
+            rst = selectDB(query);
+            boolean add = true ;
+            ArrayList<Integer> numroom = new ArrayList<>();
+        try {
+            while(rst.next() && add){
+                add = numroom.add(rst.getInt(1));
+            }
+             
+            
+            			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return numroom;
+        
+    }
+    
+    public static ArrayList<String> getDBArrayIntercoDev(int Room){
+        String query = "SELECT InterCoDevName FROM IntercoDev WHERE NumRoom='"+Room+"' ;";
+            rst = selectDB(query);
+            boolean add = true ;
+            ArrayList<String> NameIntercoDev = new ArrayList<>();
+        try {
+            while(rst.next() && add){
+                add = NameIntercoDev.add(rst.getString(1));
+            }
+             
+            
+            			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return NameIntercoDev;
+        
+    }
+
     
     public static void AddDBRoom(Room room1){
         String query = "INSERT INTO Rooms VALUES ('"+room1.getSiteName()+"','"+room1.getNumRoom()+"','"+room1.getTypeRoom()+"')";
@@ -79,56 +185,11 @@ public class DBMana {
         insertDB(query);
         System.out.println("Carte réseau bien ajoutée ! ");	
     }
-/*
-    // A MODIFIER : setDBMacAddr(NetworkCard nc, String constr)
-    public static void setDBConstr(NetworkCard nc, String constr){
-        try{
-            //String temp = nc.getDevName().substring(0, 6);
-            String query = "SELECT IDCard FROM Constructeurs WHERE ConstrName='"+constr+"'"; 
-
-            cnx = connectDB();
-            stat=cnx.createStatement();
-            rst = stat.executeQuery(query);
-            String result = null;
-            while (rst.next())
-            {
-               result = rst.getString(1);
-
-            }
-            
-            nc.setMacAddr(result);
-
-            String setconstr = "UPDATE NetworkCard SET Constr='"+nc.getConstr()+"' WHERE IDCard='"+nc.getIdcard()+"'  ";
-            stat.execute(setconstr);
-            System.out.println("ID Constructeur changé ! ");
-        }
-        catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
-*/
-    public static Integer getDBNbRoom(Site site) throws SQLException {
-        
-            String query = "SELECT COUNT(*) FROM Rooms WHERE SiteName='"+site.getSiteName()+"'";
-            rst = selectDB(query);
-            int result =0;
-            while (rst.next())
-            {
-                result = rst.getInt(1);
-            }			
-            return result;
-        
-    }
-
 		
     public static void AddDBSite(Site site) {
-        try{
-            
-            site.setNbRoom(getDBNbRoom(site));
-            String query = "INSERT INTO Sites VALUES('"+site.getSiteName()+"','"+site.getAddress()+"')";
-            insertDB(query);
-        }catch(SQLException e){
-        }		
+        site.setNbRoom(getDBNbRoom(site));
+        String query = "INSERT INTO Sites VALUES('"+site.getSiteName()+"','"+site.getAddress()+"')";
+        insertDB(query);		
     }
                 
     public static DefaultComboBoxModel selectDBSite(DefaultComboBoxModel listSite) {

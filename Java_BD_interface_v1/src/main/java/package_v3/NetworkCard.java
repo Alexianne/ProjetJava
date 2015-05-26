@@ -1,8 +1,9 @@
 package package_v3;
 
 
+
 public class NetworkCard {
-    
+      
     /* Attributes */
     private String devName; 
     private String intercoDevName;
@@ -42,13 +43,14 @@ public class NetworkCard {
     public void setIpAddr(String ipAddr) {
         this.ipAddr = ipAddr;
     }
-    // fonction à faire
-    public String generateMacAddr(String maker){
-        String macAddress="AB:CD:EF:01:23:45";
-        //select début mac avec constructeur
-        //random fin mac (test non existant)
-        return macAddress;
+   
+    // Avec le constructeur, cherche dans BDD et récupère le début de l'addr MAC
+    /*
+    public String setConstrMacAddr(String maker){
+        VOIR DANS BDMana.fetchDBMacAddrConstr()
     }
+    */
+    
     public String generateIpAddr(IntercoDev intercoDev){
         String ipAddress="192.168.0.1";
         //select préfix ip avec intercoDev
