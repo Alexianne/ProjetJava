@@ -16,8 +16,7 @@ PRIMARY KEY (DevName));
 
 CREATE TABLE IntercoDev(
 InterCoDevName VARCHAR(32) NOT NULL, 
-TypeIntercoDev VARCHAR(32),
-OS VARCHAR(32), 
+TypeIntercoDev VARCHAR(32), 
 SiteName VARCHAR(32),
 NumRoom INT(11), 
 PRIMARY KEY (IntercoDevName));
@@ -51,6 +50,7 @@ CREATE TABLE Users(
 Login VARCHAR(32) NOT NULL, 
 Pass VARCHAR(32) NOT NULL, 
 PRIMARY KEY (Login));
+
 
 ALTER TABLE Rooms ADD CONSTRAINT fk_room_site FOREIGN KEY (SiteName) REFERENCES Sites (SiteName);
 
