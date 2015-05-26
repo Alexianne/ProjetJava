@@ -271,11 +271,17 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectSite1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBSupprSite">
       <Properties>
         <Property name="text" type="java.lang.String" value="Supprimer Local"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSupprSiteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="selectSite2">
       <Properties>
@@ -298,6 +304,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Supprimer Salle"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSupprRoomActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="selectSite3">
       <Properties>

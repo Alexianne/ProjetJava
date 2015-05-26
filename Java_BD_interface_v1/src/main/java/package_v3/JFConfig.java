@@ -129,7 +129,18 @@ public class JFConfig extends javax.swing.JFrame {
 
         jBAddNetCard.setText("Ajout Carte");
 
+        selectSite1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectSite1ActionPerformed(evt);
+            }
+        });
+
         jBSupprSite.setText("Supprimer Local");
+        jBSupprSite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSupprSiteActionPerformed(evt);
+            }
+        });
 
         selectSite2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +149,11 @@ public class JFConfig extends javax.swing.JFrame {
         });
 
         jBSupprRoom.setText("Supprimer Salle");
+        jBSupprRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSupprRoomActionPerformed(evt);
+            }
+        });
 
         selectSite3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,16 +376,16 @@ public class JFConfig extends javax.swing.JFrame {
 
     private void jBSupprCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprCardActionPerformed
       
-        int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(option != JOptionPane.NO_OPTION && 
-            option != JOptionPane.CANCEL_OPTION && 
-            option != JOptionPane.CLOSED_OPTION){
-            String macAddr = (String)this.selectNetCard5.getSelectedItem();
-            DBMana.supprNCMac(macAddr);
-        }
-        
-        
-        
+        String macAddr = (String)this.selectNetCard5.getSelectedItem();
+        if(macAddr.isEmpty())
+                JOptionPane.showMessageDialog(null, "Veuillez d'abord selectionner une Carte réseau ");
+        else
+        {
+                int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION)
+                     DBMana.supprNCMac(macAddr);
+        }   
+  
     }//GEN-LAST:event_jBSupprCardActionPerformed
 
     private void selectPc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectPc5ActionPerformed
@@ -379,6 +395,38 @@ public class JFConfig extends javax.swing.JFrame {
     private void selectNetCard5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNetCard5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_selectNetCard5ActionPerformed
+
+    private void jBSupprSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprSiteActionPerformed
+        String site = (String)this.selectSite1.getSelectedItem();
+        if(site.isEmpty())
+                JOptionPane.showMessageDialog(null, "Veuillez d'abord selectionner un Site ");
+        else
+        {
+                int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION)
+                     DBMana.supprSite(site);
+        }   
+    }//GEN-LAST:event_jBSupprSiteActionPerformed
+
+    private void selectSite1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSite1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectSite1ActionPerformed
+
+    private void jBSupprRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprRoomActionPerformed
+        String room ;
+        int numroom = 1;
+        room = (String)this.selectRoom2.getSelectedItem();
+        
+        if(room instanceof String)
+                JOptionPane.showMessageDialog(null, "Veuillez d'abord selectionner un Site ");
+        else
+        {
+                numroom = Integer.decode(room);
+                int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION)
+                     DBMana.supprRoom(numroom);
+        }   
+    }//GEN-LAST:event_jBSupprRoomActionPerformed
 
     /**
      * @param args the command line arguments

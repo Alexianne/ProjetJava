@@ -1,6 +1,8 @@
 package package_v3;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 
 //connectDB();  Connexion à la BDD
@@ -163,8 +165,8 @@ public class DBMana {
                 return true;
             }
             else{
-                String query2 = "SELECT COUNT(*) FROM Rooms WHERE NumRoom='"+roomNum+"'";
-                rst = selectDB(query2);
+                String select = "SELECT COUNT(*) FROM Rooms WHERE NumRoom='"+roomNum+"'";
+                rst = selectDB(select);
                 int result2 =0;
                 while (rst.next())
                 {
@@ -217,28 +219,151 @@ public class DBMana {
         return check;
     }
     
+    /*
+    public static boolean supprNCDevRoom(int Room){
+            String query = "DELETE FROM NetworkCards WHERE DevName = '"+Room+"' ";
+            return insertDB(query);
+            
+    }
+    */
     
-    public static boolean supprNCName(String DevName){
-            String query = "DELETE FROM NetworkCards WHERE DevName = '"+DevName+"' ";
+    public static boolean supprNCDevName(String DevName){
+            String query = "DELETE FROM NetworkCards WHERE DevName = '"+DevName+"'; ";
             return insertDB(query);
             
     }
     
-    /**
-     *
-     * @param MacAddr
-     * @return
-     */
+    public static boolean supprNCInterCoDevName(String InterCoDevName){
+            String query = "DELETE FROM NetworkCards WHERE IntercoDevName = '"+InterCoDevName+"'; ";
+            return insertDB(query);
+            
+    }
+    
     public static boolean supprNCMac(String MacAddr){
-            String query = "DELETE FROM NetworkCards WHERE MacAddr = '"+MacAddr+"' ";
+            String query = "DELETE FROM NetworkCards WHERE MacAddr = '"+MacAddr+"'; ";
             return insertDB(query);
             
     }
     
-    public static boolean supprInterCoDev(String Name){
-            String query = "DELETE FROM IntercoDev WHERE InterCoDevName = '"+Name+"' ";
+    public static boolean supprInterCoDevName(String Name){
+            String query = "DELETE FROM IntercoDev WHERE InterCoDevName = '"+Name+"'; ";
+            supprNCInterCoDevName(Name);
             return insertDB(query);
     }
+    
+    public static boolean supprInterCoDevRoom(int Room) {
+            String query = "DELETE FROM IntercoDev WHERE NumRoom = '"+Room+"'; ";
+            String select = "SELECT IntercoDevName FROM IntercoDev WHERE NumRoom = '"+Room+"'; " ;
+            boolean check = insertDB(query);
+            rst = selectDB(select);
+             
+        try {
+            while(rst.next()){
+                check = check && supprNCInterCoDevName(rst.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            return check;
+    }
+    
+    public static boolean supprInterCoDevSite(String Site) {
+            String query = "DELETE FROM IntercoDev WHERE SiteName = '"+Site+"'; ";
+            String select = "SELECT Room FROM Rooms WHERE SiteName = '"+Site+"'; " ;
+            boolean check = true;
+            rst = selectDB(select);
+             
+        try {
+            while(rst.next()){
+                check = check && supprInterCoDevRoom(rst.getInt(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        check = check && insertDB(query);
+            return check;
+    }
+    
+    public static boolean supprDevName(String Name){
+            String query = "DELETE FROM Devices WHERE DevName = '"+Name+"'; ";
+            supprNCDevName(Name);
+            return insertDB(query);
+    }
+    
+    public static boolean supprDevRoom(int Room){
+            String query = "DELETE FROM Devices WHERE NumRoom = '"+Room+"'; ";
+            String select = "SELECT DevName FROM Devices WHERE NumRoom = '"+Room+"'; " ;
+            boolean check = true;
+            rst = selectDB(select);
+             
+        try {
+            while(rst.next()){
+                check = check && supprDevName(rst.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        check = check &&  insertDB(query);    
+        
+            return check;
+    }
+    
+    public static boolean supprDevSite(String Site) {
+            String query = "DELETE FROM Devices WHERE SiteName = '"+Site+"'; ";
+            String select = "SELECT NumRoom FROM Rooms WHERE SiteName = '"+Site+"'; " ;
+            boolean check = insertDB(query);
+            rst = selectDB(select);
+             
+        try {
+            while(rst.next()){
+                check = check && supprDevRoom(rst.getInt(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            return check;
+    }
+    
+    public static boolean supprRoom(int Room){
+        boolean check;
+        check = supprDevRoom(Room) && supprInterCoDevRoom(Room);
+        
+        return check;
+        
+    }
+    
+    public static boolean supprSite(String Site){
+        
+        String query = "DELETE FROM Sites WHERE SiteName = '"+Site+"'; ";
+        String select = "SELECT NumRoom FROM Rooms WHERE SiteName = '"+Site+"'; " ;
+        boolean check = true ;
+        rst = selectDB(select);
+             
+        try {
+            while(rst.next()){
+                check = check && supprRoom(rst.getInt(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+        check = check && insertDB(query);
+        
+        return check;
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
