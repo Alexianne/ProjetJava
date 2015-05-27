@@ -15,12 +15,8 @@ NumRoom INT(11),
 PRIMARY KEY (DevName));
 
 CREATE TABLE IntercoDev(
-InterCoDevName VARCHAR(32) NOT NULL, 
-<<<<<<< HEAD
+InterCoDevName VARCHAR(32) NOT NULL,
 TypeIntercoDev VARCHAR(32),
-=======
-TypeIntercoDev VARCHAR(32), 
->>>>>>> origin/master
 SiteName VARCHAR(32),
 NumRoom INT(11), 
 PRIMARY KEY (IntercoDevName));
