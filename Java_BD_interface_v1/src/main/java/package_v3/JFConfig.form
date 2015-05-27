@@ -61,9 +61,7 @@
                       <EmptySpace pref="30" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jBSupprDev" alignment="1" max="32767" attributes="0"/>
-                          <Component id="selectDev3" alignment="1" max="32767" attributes="0"/>
-                          <Component id="selectRoom3" alignment="1" max="32767" attributes="0"/>
-                          <Component id="selectSite3" alignment="1" max="32767" attributes="0"/>
+                          <Component id="selectIntercoDev3" alignment="1" max="32767" attributes="0"/>
                           <Component id="jBAddDev" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -76,9 +74,7 @@
               </Group>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jBSupprPc" alignment="0" max="32767" attributes="0"/>
-                  <Component id="selectPc4" alignment="0" max="32767" attributes="0"/>
-                  <Component id="selectRoom4" alignment="0" max="32767" attributes="0"/>
-                  <Component id="selectSite4" alignment="0" max="32767" attributes="0"/>
+                  <Component id="selectDev4" alignment="0" max="32767" attributes="0"/>
                   <Component id="jBAddPc" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -87,11 +83,9 @@
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="selectNetCard5" max="32767" attributes="0"/>
                   <Component id="jBSupprCard" alignment="1" max="32767" attributes="0"/>
-                  <Component id="selectSite5" alignment="1" max="32767" attributes="0"/>
-                  <Component id="selectRoom5" alignment="1" max="32767" attributes="0"/>
-                  <Component id="selectPc5" alignment="1" max="32767" attributes="0"/>
+                  <Component id="selectDev5" alignment="1" max="32767" attributes="0"/>
+                  <Component id="selectNC5" alignment="1" max="32767" attributes="0"/>
                   <Component id="jBAddNetCard" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jImgNetCard" min="-2" max="-2" attributes="0"/>
@@ -148,33 +142,23 @@
                       <EmptySpace pref="30" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                              <Component id="selectNetCard5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="23" max="32767" attributes="0"/>
+                              <EmptySpace min="113" max="32767" attributes="0"/>
                               <Component id="jBSupprCard" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="selectSite2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="selectSite3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="selectSite5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="selectSite4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="selectIntercoDev3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="selectDev5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="selectDev4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="selectSite1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="selectRoom2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="selectRoom3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="selectRoom5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="selectRoom4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="selectNC5" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="selectDev3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="selectPc5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="selectPc4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="49" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jBSupprDev" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jBSupprRoom" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -262,11 +246,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ajout Equipement"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAddPcActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBAddNetCard">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ajout Carte"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAddNetCardActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="selectSite1">
       <Properties>
@@ -274,9 +264,6 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectSite1ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBSupprSite">
       <Properties>
@@ -311,24 +298,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSupprRoomActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="selectSite3">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectSite3ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="selectRoom3">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="selectDev3">
+    <Component class="javax.swing.JComboBox" name="selectIntercoDev3">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -340,24 +310,7 @@
         <Property name="text" type="java.lang.String" value="Supprimer Equipement d&apos;interco"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="selectSite4">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectSite4ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="selectRoom4">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="selectPc4">
+    <Component class="javax.swing.JComboBox" name="selectDev4">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -369,42 +322,19 @@
         <Property name="text" type="java.lang.String" value="Supprimer Equipement"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="selectSite5">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectSite5ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="selectRoom5">
+    <Component class="javax.swing.JComboBox" name="selectDev5">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="selectPc5">
+    <Component class="javax.swing.JComboBox" name="selectNC5">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectPc5ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="selectNetCard5">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectNetCard5ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBSupprCard">
       <Properties>

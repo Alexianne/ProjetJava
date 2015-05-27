@@ -68,7 +68,6 @@ public class DBMana {
         String query = "SELECT IDCard FROM Constructeurs WHERE ConstrName '"+maker+"'; ";
         rst = DBMana.selectDB(query);
         try {
-            
             macAddress = rst.getString(1);
             return macAddress;
         } catch (SQLException ex) {
@@ -76,6 +75,22 @@ public class DBMana {
             return macAddress;
         }
     }
+    
+    public static String getDBDebutMac(String constr)  {
+        
+            String query = "SELECT IDCard FROM Constructeurs WHERE ConstrName='"+constr+"'";
+            rst = selectDB(query);
+            String result ="";
+        try {
+            result = rst.getString(1);
+            			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return result;
+        
+    }
+    
     /*
     public static Integer getDBNumRoom(String Site)  {
         
@@ -173,11 +188,28 @@ public class DBMana {
         insertDB(query);
         System.out.println("Produit bien ajouté ! ");
     }
+    
+    public static void AddDBIntercoDev(IntercoDev intercoDev){
+        String query = "INSERT INTO Devices VALUES ('"+intercoDev.getIntercoDevName()+"','"+intercoDev.getTypeIntercoDev()+"','"+intercoDev.getSiteName()+"','"+intercoDev.getNumRoom()+"')";
+        insertDB(query);
+        System.out.println("Périphérique bien ajouté ! ");
+    }
 		
     public static void AddDBDev(Devices dev){
         String query = "INSERT INTO Devices VALUES ('"+dev.getDevName()+"','"+dev.getTypeDev()+"','"+dev.getOS()+"','"+dev.getSiteName()+"','"+dev.getNumRoom()+"')";
         insertDB(query);
         System.out.println("Périphérique bien ajouté ! ");
+    }
+    
+    public static void AddDBInterface(Interface interf){
+        String query = "INSERT INTO Interfaces VALUES ('"+interf.getIntName()+"','"+interf.getIntercoDevName()+"','"+interf.getIpAddr()+"')";
+        insertDB(query);
+        System.out.println("Interface bien ajouté ! ");
+    }
+    public static void UpdateDBInterface(Interface interf){
+        String query = "UPDATE Interfaces SET "+interf.getIpAddr()+" WHERE IntName="+interf.getIntName()+" AND IntercoDevName="+interf.getIntercoDevName();
+        insertDB(query);
+        System.out.println("Interface bien ajouté ! ");
     }
 
     public static void AddDBNC(NetworkCard nc){
@@ -251,8 +283,7 @@ public class DBMana {
             while (rst.next())
             {
                 result = rst.getString(1);
-                listSite.addElement(result);
-				   
+                listSite.addElement(result);		   
             }
             return listSite;
         }
@@ -262,13 +293,106 @@ public class DBMana {
         }
     }
     
-
-    public static boolean intercoDevExist(String intercoDevName, String siteName, String roomNum) {
+    public static DefaultComboBoxModel selectDBConstr(DefaultComboBoxModel listConstr) {
         try{
-            cnx=DBMana.connectDB();
-            stat=cnx.createStatement();
-            String query = "SELECT COUNT(*) FROM IntercoDev WHERE SiteName='"+siteName+"' AND NumRoom='"+roomNum+"'";
-            rst = stat.executeQuery(query);
+            String query = "SELECT ConstrName FROM Constructeurs";
+            
+            rst = selectDB(query);
+            String result;
+            while (rst.next())
+            {
+                result = rst.getString(1);
+                listConstr.addElement(result);		   
+            }
+            return listConstr;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static DefaultComboBoxModel selectDBIntercoDev(DefaultComboBoxModel listIntercoDev) {
+        try{
+            String query = "SELECT InterCoDevName FROM IntercoDev";
+            
+            rst = selectDB(query);
+            String result;
+            while (rst.next())
+            {
+                result = rst.getString(1);
+                listIntercoDev.addElement(result);		   
+            }
+            return listIntercoDev;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static DefaultComboBoxModel selectDBDev(DefaultComboBoxModel listDev) {
+        try{
+            String query = "SELECT DevName FROM Devices";
+            
+            rst = selectDB(query);
+            String result;
+            while (rst.next())
+            {
+                result = rst.getString(1);
+                listDev.addElement(result);		   
+            }
+            return listDev;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static DefaultComboBoxModel selectDBInt(DefaultComboBoxModel listInt, String intercoDev) {
+        try{
+            String query = "SELECT IntName FROM Interfaces WHERE IntercoDevName='"+intercoDev+"'";
+            
+            rst = selectDB(query);
+            String result;
+            while (rst.next())
+            {
+                result = rst.getString(1);
+                listInt.addElement(result);		   
+            }
+            return listInt;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static DefaultComboBoxModel selectDBNC(DefaultComboBoxModel listNC, String dev) {
+        try{
+            String query = "SELECT MacAddr FROM NetworkCards WHERE DevName='"+dev+"'";
+            
+            rst = selectDB(query);
+            String result;
+            while (rst.next())
+            {
+                result = rst.getString(1);
+                listNC.addElement(result);		   
+            }
+            return listNC;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+
+    public static boolean intercoDevExist(String intercoDevName) {
+        try{
+            String query = "SELECT COUNT(*) FROM IntercoDev WHERE SiteName='"+intercoDevName+"'";
+            rst = selectDB(query);
             int result =0;
             while (rst.next())
             {
@@ -279,19 +403,29 @@ public class DBMana {
                 return true;
             }
             else{
-                String query2 = "SELECT COUNT(*) FROM IntercoDev WHERE IntercoDevName='"+intercoDevName+"'";
-                rst = stat.executeQuery(query2);
-                int result2 =0;
-                while (rst.next())
-                {
-                   result2 = rst.getInt(1);
-                }
-                System.out.println(result2);
-                if(result2 == 0){
-                    return true;
-                }else{
-                    return false;
-                }
+                return false;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+	}
+    }
+    
+    public static boolean devExist(String devName) {
+        try{
+            String query = "SELECT COUNT(*) FROM Devices WHERE DevName='"+devName+"'";
+            rst = selectDB(query);
+            int result =0;
+            while (rst.next())
+            {
+                result = rst.getInt(1);
+            }
+            System.out.println(result);
+            if(result == 0){
+                return true;
+            }
+            else{
+                return false;
             }
         }catch(SQLException e){
             e.printStackTrace();

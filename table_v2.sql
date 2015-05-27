@@ -17,7 +17,6 @@ PRIMARY KEY (DevName));
 CREATE TABLE IntercoDev(
 InterCoDevName VARCHAR(32) NOT NULL, 
 TypeIntercoDev VARCHAR(32),
-OS VARCHAR(32), 
 SiteName VARCHAR(32),
 NumRoom INT(11), 
 PRIMARY KEY (IntercoDevName));
