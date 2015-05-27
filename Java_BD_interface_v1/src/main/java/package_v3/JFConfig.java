@@ -40,9 +40,9 @@ public class JFConfig extends javax.swing.JFrame {
         DefaultComboBoxModel listDev_2 = new DefaultComboBoxModel();
         listDev_2=DBMana.selectDBDev(listDev_2);
         selectDev5.setModel(listDev_2);
-        String devName = (String)this.selectDev5.getSelectedItem();
+        String dev = (String)this.selectDev5.getSelectedItem();
         DefaultComboBoxModel listNC = new DefaultComboBoxModel();
-        listNC=DBMana.selectDBNC(listNC, devName);
+        listNC=DBMana.selectDBNC(listNC, dev);
         selectNC5.setModel(listNC);
     }
 
@@ -159,6 +159,12 @@ public class JFConfig extends javax.swing.JFrame {
         });
 
         jBSupprDev.setText("Supprimer Equipement");
+
+        selectDev5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectDev5ActionPerformed(evt);
+            }
+        });
 
         jBSupprCard.setText("Supprimer Carte");
         jBSupprCard.addActionListener(new java.awt.event.ActionListener() {
@@ -381,6 +387,14 @@ public class JFConfig extends javax.swing.JFrame {
                     selectIntercoDev3.setModel(listIntercoDev);
                 }
     }//GEN-LAST:event_jBSupprIntercoDevActionPerformed
+
+    private void selectDev5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectDev5ActionPerformed
+        // TODO add your handling code here:
+        String dev = (String)this.selectDev5.getSelectedItem();
+        DefaultComboBoxModel listNC = new DefaultComboBoxModel();
+        listNC=DBMana.selectDBNC(listNC, dev);
+        selectNC5.setModel(listNC);
+    }//GEN-LAST:event_selectDev5ActionPerformed
 
     /**
      * @param args the command line arguments

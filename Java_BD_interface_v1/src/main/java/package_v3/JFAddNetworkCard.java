@@ -66,6 +66,12 @@ public class JFAddNetworkCard extends javax.swing.JFrame {
 
         jLDevName.setText("Nom de l'équipement : ");
 
+        selectIntercoDev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectIntercoDevActionPerformed(evt);
+            }
+        });
+
         jLIntercoDev.setText("Equipement d'interconnexion :");
 
         jLInt.setText("Interface : ");
@@ -181,6 +187,9 @@ public class JFAddNetworkCard extends javax.swing.JFrame {
             else{
                 NetworkCard nc = new NetworkCard(dev, interf, intercoDev, addrMac, "192.168.10.2");
                 DBMana.AddDBNC(nc);
+                String ip = DBMana.selectDBIpAddr(interf, intercoDev);
+                Interface intCo = new Interface(interf, intercoDev, ip, "up");
+                DBMana.UpdateDBInterface(intCo);
                 JFAddOk addOk = new JFAddOk("carte réseau", "ajoutée");
                 addOk.setVisible(true);
                 this.setVisible(false);
@@ -188,6 +197,14 @@ public class JFAddNetworkCard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jBOkActionPerformed
+
+    private void selectIntercoDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectIntercoDevActionPerformed
+        // TODO add your handling code here:
+        String intercoDev = (String)this.selectIntercoDev.getSelectedItem();
+        DefaultComboBoxModel listInt = new DefaultComboBoxModel();
+        listInt=DBMana.selectDBInt(listInt, intercoDev);
+        selectInt.setModel(listInt);
+    }//GEN-LAST:event_selectIntercoDevActionPerformed
 
     /**
      * @param args the command line arguments

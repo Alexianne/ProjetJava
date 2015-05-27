@@ -26,6 +26,7 @@ IntName VARCHAR(32),
 InterCoDevName VARCHAR(32),
 IpAddr VARCHAR(32), 
 PRIMARY KEY (IntName,IntercoDevName));
+alter table interfaces add IntState varchar(32);
 
 CREATE TABLE NetworkCards(
 DevName VARCHAR(32) NOT NULL, 

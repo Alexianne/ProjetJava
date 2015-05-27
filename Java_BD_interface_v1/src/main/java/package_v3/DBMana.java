@@ -116,27 +116,16 @@ public class DBMana {
             rst = selectDB(selectAllIP);
             
             while( (i<= 255) && IPexist ){
-                    
                 i++;
                 check = ipAddrDev + i;
-                
                 while (rst.next() && IPexist ){
-                    
                     IPexist = check.equals(rst.getString(1));
-                        
                 }
-                
                 rst.beforeFirst();
-                
             }
-            
             System.out.println(IPexist);
             System.out.println(check);
-               
-            
-            
-  
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -321,19 +310,19 @@ public class DBMana {
     }
     
     public static void AddDBInterface(Interface interf){
-        String query = "INSERT INTO Interfaces VALUES ('"+interf.getIntName()+"','"+interf.getIntercoDevName()+"','"+interf.getIpAddr()+"')";
+        String query = "INSERT INTO Interfaces VALUES ('"+interf.getIntName()+"','"+interf.getIntercoDevName()+"','"+interf.getIpAddr()+"', '"+interf.getIntState()+"')";
         insertDB(query);
         System.out.println("Interface bien ajouté ! ");
     }
     public static void UpdateDBInterface(Interface interf){
-        String query = "UPDATE Interfaces SET IpAddr='"+interf.getIpAddr()+"' WHERE IntName='"+interf.getIntName()+"' AND IntercoDevName='"+interf.getIntercoDevName()+"'";
+        String query = "UPDATE Interfaces SET IpAddr='"+interf.getIpAddr()+"', IntState='"+interf.getIntState()+"' WHERE IntName='"+interf.getIntName()+"' AND IntercoDevName='"+interf.getIntercoDevName()+"'";
         System.out.println("query : "+query);
         insertDB(query);
         System.out.println("Interface bien ajouté ! ");
     }
 
     public static void AddDBNC(NetworkCard nc){
-        String query = "INSERT INTO NetworkCards VALUES ('"+nc.getDevName()+"','"+nc.getIntercoDevName()+"','"+nc.getMacAddr()+"','"+nc.getIpAddr()+"')";
+        String query = "INSERT INTO NetworkCards VALUES ('"+nc.getDevName()+"', '"+nc.getIntName()+"', '"+nc.getIntercoDevName()+"','"+nc.getMacAddr()+"','"+nc.getIpAddr()+"')";
         insertDB(query);
         System.out.println("Carte réseau bien ajoutée ! ");	
     }
@@ -451,6 +440,24 @@ public class DBMana {
         }
     }
     
+    public static DefaultComboBoxModel selectDBIntercoDev(DefaultComboBoxModel listIntercoDev, String typeDev) {
+        try{
+            String query = "SELECT InterCoDevName FROM IntercoDev WHERE TypeIntercoDev='"+typeDev+"'";
+            rst = selectDB(query);
+            String result;
+            while (rst.next())
+            {
+                result = rst.getString(1);
+                listIntercoDev.addElement(result);		   
+            }
+            return listIntercoDev;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public static DefaultComboBoxModel selectDBDev(DefaultComboBoxModel listDev) {
         try{
             String query = "SELECT DevName FROM Devices";
@@ -472,7 +479,7 @@ public class DBMana {
     
     public static DefaultComboBoxModel selectDBInt(DefaultComboBoxModel listInt, String intercoDev) {
         try{
-            String query = "SELECT IntName FROM Interfaces WHERE IntercoDevName='"+intercoDev+"'";
+            String query = "SELECT IntName FROM Interfaces WHERE IntercoDevName='"+intercoDev+"' AND IntState='down'";
             
             rst = selectDB(query);
             String result;

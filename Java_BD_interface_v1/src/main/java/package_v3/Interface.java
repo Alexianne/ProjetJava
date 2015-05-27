@@ -15,12 +15,14 @@ public class Interface {
     private String intName;
     private String intercoDevName;
     private String ipAddr;
+    private String intState;
     
     /* Constructor */
-    public Interface(String intName, String intercoDevName, String ipAddr){
+    public Interface(String intName, String intercoDevName, String ipAddr, String intState){
         this.intName = intName;
         this.intercoDevName = intercoDevName;
         this.ipAddr = ipAddr;
+        this.intState = intState;
     }
     
     /* Methods */
@@ -41,6 +43,12 @@ public class Interface {
     }
     public void setIpAddr(String ipAddr) {
         this.ipAddr = ipAddr;
+    }
+    public String getIntState() {
+        return intState;
+    }
+    public void setIntState(String intState) {
+        this.intState = intState;
     }
     
 }
