@@ -6,13 +6,15 @@ public class NetworkCard {
       
     /* Attributes */
     private String devName; 
+    private String intName;
     private String intercoDevName;
     private String macAddr;
     private String ipAddr;
 
     /* Constructor */
-    public NetworkCard(String devName,String intercoDevName, String macAddr, String ipAddr){
+    public NetworkCard(String devName,String intName, String intercoDevName, String macAddr, String ipAddr){
         this.devName = devName;
+        this.intName = intName;
         this.intercoDevName = intercoDevName;
         this.macAddr = macAddr;
         this.ipAddr = ipAddr;
@@ -24,6 +26,12 @@ public class NetworkCard {
     }
     public void setDevName(String devName) {
         this.devName = devName;
+    }
+    public String getIntName() {
+        return intName;
+    }
+    public void setIntName(String intName) {
+        this.intName = intName;
     }
     public String getIntercoDevName() {
         return intercoDevName;

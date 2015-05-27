@@ -5,15 +5,13 @@ public class IntercoDev {
     /* Attributs */
     private String intercoDevName;
     private String typeIntercoDev;
-    private String Os;
     private String siteName;
     private String numRoom;
     
     /* Constructor */
-    public IntercoDev(String intercoDevName, String typeIntercoDev, String Os, String siteName, String numRoom){
+    public IntercoDev(String intercoDevName, String typeIntercoDev, String siteName, String numRoom){
         this.intercoDevName = intercoDevName;
         this.typeIntercoDev = typeIntercoDev;
-        this.Os = Os;
         this.siteName = siteName;
         this.numRoom = numRoom;
     }
@@ -30,12 +28,6 @@ public class IntercoDev {
     }
     public void setTypeIntercoDev(String typeIntercoDev) {
         this.typeIntercoDev = typeIntercoDev;
-    }
-    public String getOs() {
-        return Os;
-    }
-    public void setOs(String Os) {
-        this.Os = Os;
     }
     public String getSiteName() {
         return siteName;

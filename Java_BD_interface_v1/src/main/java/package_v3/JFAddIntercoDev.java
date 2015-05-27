@@ -29,7 +29,29 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
         DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
         listRoom=DBMana.selectDBRoom(listRoom, siteName);
         selectRoom.setModel(listRoom);
-        
+        DefaultComboBoxModel listIntercoDev = new DefaultComboBoxModel();
+        listIntercoDev=DBMana.selectDBIntercoDev(listIntercoDev);
+        //listIntercoDev=DBMana.selectDBIntercoDev(listIntercoDev, "Routeur");
+        selectIntercoDev.setModel(listIntercoDev);
+        String intercoDev = (String)this.selectIntercoDev.getSelectedItem();
+        DefaultComboBoxModel listInt = new DefaultComboBoxModel();
+        listInt=DBMana.selectDBInt(listInt, intercoDev);
+        selectInt.setModel(listInt);
+        String typeIntercoDev = (String)this.selectTypeDev.getSelectedItem();
+        switch(typeIntercoDev){
+            case "Routeur":
+                this.selectIntercoDev.setVisible(false);
+                this.selectInt.setVisible(false);
+                this.jLIntercoDev.setVisible(false);
+                this.jLInt.setVisible(false);
+                break;
+            default:
+                this.selectIntercoDev.setVisible(true);
+                this.selectInt.setVisible(true);
+                this.jLIntercoDev.setVisible(true);
+                this.jLInt.setVisible(true);
+                break;
+        }
     }
 
     /**
@@ -51,8 +73,12 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
         selectTypeDev = new javax.swing.JComboBox();
         jLerr = new javax.swing.JLabel();
         selectRoom = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
+        jLIntercoDevName = new javax.swing.JLabel();
         jTIntercoDevName = new javax.swing.JTextField();
+        selectIntercoDev = new javax.swing.JComboBox();
+        jLIntercoDev = new javax.swing.JLabel();
+        selectInt = new javax.swing.JComboBox();
+        jLInt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,10 +106,25 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
         jLRoom.setText("Salle : ");
 
         selectTypeDev.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Routeur", "Switch", "Borne Wifi" }));
+        selectTypeDev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectTypeDevActionPerformed(evt);
+            }
+        });
 
         jLerr.setText("Texte d'erreur");
 
-        jLabel1.setText("Nom d'équipement d'interco : ");
+        jLIntercoDevName.setText("Nom d'équipement d'interco : ");
+
+        selectIntercoDev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectIntercoDevActionPerformed(evt);
+            }
+        });
+
+        jLIntercoDev.setText("Connecté à :");
+
+        jLInt.setText("Sur telle interface : ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,24 +150,25 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
                         .addComponent(jLAdd))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLSiteName)
+                            .addComponent(jLRoom)
+                            .addComponent(jLTypeDev)
+                            .addComponent(jLIntercoDevName)
+                            .addComponent(jLIntercoDev)
+                            .addComponent(jLInt))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(selectRoom, 0, 92, Short.MAX_VALUE)
+                                .addComponent(selectSite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLSiteName)
-                                    .addComponent(jLRoom)
-                                    .addComponent(jLTypeDev))
-                                .addGap(59, 59, 59)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(selectTypeDev, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(selectRoom, 0, 92, Short.MAX_VALUE)
-                                        .addComponent(selectSite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTIntercoDevName, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(selectInt, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(selectIntercoDev, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTIntercoDevName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                                    .addComponent(selectTypeDev, javax.swing.GroupLayout.Alignment.TRAILING, 0, 92, Short.MAX_VALUE))))))
                 .addGap(0, 51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -151,16 +193,20 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
                             .addComponent(selectTypeDev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLTypeDev)))
                     .addComponent(jLSiteName))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTIntercoDevName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLIntercoDevName))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 59, Short.MAX_VALUE)
-                        .addComponent(jButtonAddIntercoDev))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTIntercoDevName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectIntercoDev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLIntercoDev))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLInt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jButtonAddIntercoDev)
                 .addContainerGap())
         );
 
@@ -169,7 +215,7 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
 
     private void jButtonAddIntercoDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddIntercoDevActionPerformed
         // TODO add your handling code here:
-       String intercoDevName = this.jTIntercoDevName.getText();
+        String intercoDevName = this.jTIntercoDevName.getText();
         String siteName = (String)this.selectSite.getSelectedItem();
         String numRoom = (String)this.selectRoom.getSelectedItem();
         String intercoDevType = (String)this.selectTypeDev.getSelectedItem();
@@ -180,18 +226,87 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
         }
         else{
             //test nom equipement d'interco non existant
-            boolean exist = DBMana.intercoDevExist(intercoDevName, siteName, numRoom);
+            boolean exist = DBMana.intercoDevExist(intercoDevName);
             if(!exist){
-                this.jLerr.setText("La salle "+numRoom+" existe déjà");
+                this.jLerr.setText("L'équipement d'interconnexion "+intercoDevName+" existe déjà");
                 this.jLerr.setVisible(true);
             }
             else{
-                Room room = new Room (intercoDevType, siteName, numRoom);
-                DBMana.AddDBRoom(room);
+                IntercoDev intercoDev = new IntercoDev (intercoDevName, intercoDevType, siteName, numRoom);
+                DBMana.AddDBIntercoDev(intercoDev);
                 this.jLerr.setVisible(false);
-                JFAddOk addOk = new JFAddOk("salle", "ajoutée");
-                addOk.setVisible(true);
-                this.setVisible(false);
+                switch(intercoDevType){
+                    case "Routeur":
+                        Interface fa0 = new Interface("fa0/0", intercoDevName, " ");
+                        DBMana.AddDBInterface(fa0);
+                        Interface fa1 = new Interface("fa0/1", intercoDevName, " ");
+                        DBMana.AddDBInterface(fa1);
+                        Interface ser0 = new Interface("serial0/0/0", intercoDevName, " ");
+                        DBMana.AddDBInterface(ser0);
+                        Interface ser1 = new Interface("serial0/1/0", intercoDevName, " ");
+                        DBMana.AddDBInterface(ser1);
+                        JFAddRouterInterface frameRouterInt = new JFAddRouterInterface(intercoDevName);
+                        frameRouterInt.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    case "Switch":
+                        String intercoDevCo = (String)this.selectIntercoDev.getSelectedItem();
+                        String intName = (String)this.selectInt.getSelectedItem();
+                        String ipAddr = DBMana.selectDBIpAddr(intName, intercoDevCo);
+                        Interface port1 = new Interface("#1", intercoDevName, ipAddr);
+                        DBMana.AddDBInterface(port1);
+                        Interface port2 = new Interface("#2", intercoDevName, " ");
+                        DBMana.AddDBInterface(port2);
+                        Interface port3 = new Interface("#3", intercoDevName, " ");
+                        DBMana.AddDBInterface(port3);
+                        Interface port4 = new Interface("#4", intercoDevName, " ");
+                        DBMana.AddDBInterface(port4);
+                        Interface port5 = new Interface("#5", intercoDevName, " ");
+                        DBMana.AddDBInterface(port5);
+                        Interface port6 = new Interface("#6", intercoDevName, " ");
+                        DBMana.AddDBInterface(port6);
+                        Interface port7 = new Interface("#7", intercoDevName, " ");
+                        DBMana.AddDBInterface(port7);
+                        Interface port8 = new Interface("#8", intercoDevName, " ");
+                        DBMana.AddDBInterface(port8);
+                        Interface port9 = new Interface("#9", intercoDevName, " ");
+                        DBMana.AddDBInterface(port9);
+                        Interface port10 = new Interface("#10", intercoDevName, " ");
+                        DBMana.AddDBInterface(port10);
+                        Interface port11 = new Interface("#11", intercoDevName, " ");
+                        DBMana.AddDBInterface(port11);
+                        Interface port12 = new Interface("#12", intercoDevName, " ");
+                        DBMana.AddDBInterface(port12);
+                        /*Interface port13 = new Interface("#13", intercoDevName, " ");
+                        DBMana.AddDBInterface(port13);
+                        Interface port14 = new Interface("#14", intercoDevName, " ");
+                        DBMana.AddDBInterface(port14);
+                        Interface port15 = new Interface("#15", intercoDevName, " ");
+                        DBMana.AddDBInterface(port15);
+                        Interface port16 = new Interface("#16", intercoDevName, " ");
+                        DBMana.AddDBInterface(port16);
+                        Interface port17 = new Interface("#17", intercoDevName, " ");
+                        DBMana.AddDBInterface(port17);
+                        Interface port18 = new Interface("#18", intercoDevName, " ");
+                        DBMana.AddDBInterface(port18);
+                        Interface port19 = new Interface("#19", intercoDevName, " ");
+                        DBMana.AddDBInterface(port19);
+                        Interface port20 = new Interface("#20", intercoDevName, " ");
+                        DBMana.AddDBInterface(port20);
+                        Interface port21 = new Interface("#21", intercoDevName, " ");
+                        DBMana.AddDBInterface(port21);
+                        Interface port22 = new Interface("#22", intercoDevName, " ");
+                        DBMana.AddDBInterface(port22);
+                        Interface port23 = new Interface("#23", intercoDevName, " ");
+                        DBMana.AddDBInterface(port23);
+                        Interface port24 = new Interface("#24", intercoDevName, " ");
+                        DBMana.AddDBInterface(port24);*/
+                        JFAddOk addOk = new JFAddOk("switch", "ajouté");
+                        addOk.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    case "Borne Wifi":
+                }
             }
             
         }
@@ -204,6 +319,33 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
         listRoom=DBMana.selectDBRoom(listRoom, siteName);
         selectRoom.setModel(listRoom);
     }//GEN-LAST:event_selectSiteActionPerformed
+
+    private void selectTypeDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectTypeDevActionPerformed
+        // TODO add your handling code here:
+        String typeIntercoDev = (String)this.selectTypeDev.getSelectedItem();
+        switch(typeIntercoDev){
+            case "Routeur":
+                this.selectIntercoDev.setVisible(false);
+                this.selectInt.setVisible(false);
+                this.jLIntercoDev.setVisible(false);
+                this.jLInt.setVisible(false);
+                break;
+            default:
+                this.selectIntercoDev.setVisible(true);
+                this.selectInt.setVisible(true);
+                this.jLIntercoDev.setVisible(true);
+                this.jLInt.setVisible(true);
+                break;
+        }
+    }//GEN-LAST:event_selectTypeDevActionPerformed
+
+    private void selectIntercoDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectIntercoDevActionPerformed
+        // TODO add your handling code here:
+        String intercoDev = (String)this.selectIntercoDev.getSelectedItem();
+        DefaultComboBoxModel listInt = new DefaultComboBoxModel();
+        listInt=DBMana.selectDBInt(listInt, intercoDev);
+        selectInt.setModel(listInt);
+    }//GEN-LAST:event_selectIntercoDevActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,12 +401,16 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAddIntercoDev;
     private javax.swing.JLabel jImgAddRoom;
     private javax.swing.JLabel jLAdd;
+    private javax.swing.JLabel jLInt;
+    private javax.swing.JLabel jLIntercoDev;
+    private javax.swing.JLabel jLIntercoDevName;
     private javax.swing.JLabel jLRoom;
     private javax.swing.JLabel jLSiteName;
     private javax.swing.JLabel jLTypeDev;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLerr;
     private javax.swing.JTextField jTIntercoDevName;
+    private javax.swing.JComboBox selectInt;
+    private javax.swing.JComboBox selectIntercoDev;
     private javax.swing.JComboBox selectRoom;
     private javax.swing.JComboBox selectSite;
     private javax.swing.JComboBox selectTypeDev;

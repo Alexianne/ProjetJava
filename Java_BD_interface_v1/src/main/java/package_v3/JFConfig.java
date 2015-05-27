@@ -7,6 +7,7 @@ package package_v3;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,33 +25,25 @@ public class JFConfig extends javax.swing.JFrame {
         listSite=DBMana.selectDBSite(listSite);
         DefaultComboBoxModel listSite_2 = new DefaultComboBoxModel();
         listSite_2=DBMana.selectDBSite(listSite_2);
-        DefaultComboBoxModel listSite_3 = new DefaultComboBoxModel();
-        listSite_3=DBMana.selectDBSite(listSite_3);
-        DefaultComboBoxModel listSite_4 = new DefaultComboBoxModel();
-        listSite_4=DBMana.selectDBSite(listSite_4);
-        DefaultComboBoxModel listSite_5 = new DefaultComboBoxModel();
-        listSite_5=DBMana.selectDBSite(listSite_5);
         selectSite1.setModel(listSite);
         selectSite2.setModel(listSite_2);
-        selectSite3.setModel(listSite_3);
-        selectSite4.setModel(listSite_4);
-        selectSite5.setModel(listSite_5);
         String siteName = (String)this.selectSite2.getSelectedItem();
         DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
         listRoom=DBMana.selectDBRoom(listRoom, siteName);
-        String siteName2 = (String)this.selectSite3.getSelectedItem();
-        DefaultComboBoxModel listRoom2 = new DefaultComboBoxModel();
-        listRoom2=DBMana.selectDBRoom(listRoom2, siteName2);
-        String siteName3 = (String)this.selectSite4.getSelectedItem();
-        DefaultComboBoxModel listRoom3 = new DefaultComboBoxModel();
-        listRoom3=DBMana.selectDBRoom(listRoom3, siteName3);
-        String siteName4 = (String)this.selectSite5.getSelectedItem();
-        DefaultComboBoxModel listRoom4 = new DefaultComboBoxModel();
-        listRoom4=DBMana.selectDBRoom(listRoom4, siteName4);
         selectRoom2.setModel(listRoom);
-        selectRoom3.setModel(listRoom2);
-        selectRoom4.setModel(listRoom3);
-        selectRoom5.setModel(listRoom4);
+        DefaultComboBoxModel listIntercoDev = new DefaultComboBoxModel();
+        listIntercoDev=DBMana.selectDBIntercoDev(listIntercoDev);
+        selectIntercoDev3.setModel(listIntercoDev);
+        DefaultComboBoxModel listDev = new DefaultComboBoxModel();
+        listDev=DBMana.selectDBDev(listDev);
+        selectDev4.setModel(listDev);
+        DefaultComboBoxModel listDev_2 = new DefaultComboBoxModel();
+        listDev_2=DBMana.selectDBDev(listDev_2);
+        selectDev5.setModel(listDev_2);
+        String devName = (String)this.selectDev5.getSelectedItem();
+        DefaultComboBoxModel listNC = new DefaultComboBoxModel();
+        listNC=DBMana.selectDBNC(listNC, devName);
+        selectNC5.setModel(listNC);
     }
 
     /**
@@ -79,18 +72,12 @@ public class JFConfig extends javax.swing.JFrame {
         selectSite2 = new javax.swing.JComboBox();
         selectRoom2 = new javax.swing.JComboBox();
         jBSupprRoom = new javax.swing.JButton();
-        selectSite3 = new javax.swing.JComboBox();
-        selectRoom3 = new javax.swing.JComboBox();
-        selectDev3 = new javax.swing.JComboBox();
+        selectIntercoDev3 = new javax.swing.JComboBox();
+        jBSupprIntercoDev = new javax.swing.JButton();
+        selectDev4 = new javax.swing.JComboBox();
         jBSupprDev = new javax.swing.JButton();
-        selectSite4 = new javax.swing.JComboBox();
-        selectRoom4 = new javax.swing.JComboBox();
-        selectPc4 = new javax.swing.JComboBox();
-        jBSupprPc = new javax.swing.JButton();
-        selectSite5 = new javax.swing.JComboBox();
-        selectRoom5 = new javax.swing.JComboBox();
-        selectPc5 = new javax.swing.JComboBox();
-        selectNetCard5 = new javax.swing.JComboBox();
+        selectDev5 = new javax.swing.JComboBox();
+        selectNC5 = new javax.swing.JComboBox();
         jBSupprCard = new javax.swing.JButton();
 
         jLabel3.setText("jLabel2");
@@ -131,12 +118,16 @@ public class JFConfig extends javax.swing.JFrame {
         });
 
         jBAddPc.setText("Ajout Equipement");
+        jBAddPc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAddPcActionPerformed(evt);
+            }
+        });
 
         jBAddNetCard.setText("Ajout Carte");
-
-        selectSite1.addActionListener(new java.awt.event.ActionListener() {
+        jBAddNetCard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectSite1ActionPerformed(evt);
+                jBAddNetCardActionPerformed(evt);
             }
         });
 
@@ -160,39 +151,14 @@ public class JFConfig extends javax.swing.JFrame {
             }
         });
 
-        selectSite3.addActionListener(new java.awt.event.ActionListener() {
+        jBSupprIntercoDev.setText("Supprimer Equipement d'interco");
+        jBSupprIntercoDev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectSite3ActionPerformed(evt);
+                jBSupprIntercoDevActionPerformed(evt);
             }
         });
 
-        jBSupprDev.setText("Supprimer Equipement d'interco");
-
-        selectSite4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectSite4ActionPerformed(evt);
-            }
-        });
-
-        jBSupprPc.setText("Supprimer Equipement");
-
-        selectSite5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectSite5ActionPerformed(evt);
-            }
-        });
-
-        selectPc5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectPc5ActionPerformed(evt);
-            }
-        });
-
-        selectNetCard5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectNetCard5ActionPerformed(evt);
-            }
-        });
+        jBSupprDev.setText("Supprimer Equipement");
 
         jBSupprCard.setText("Supprimer Carte");
         jBSupprCard.addActionListener(new java.awt.event.ActionListener() {
@@ -224,15 +190,13 @@ public class JFConfig extends javax.swing.JFrame {
                     .addComponent(jBAddRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(selectSite2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(selectRoom2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBSupprRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE))
+                    .addComponent(jBSupprRoom, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jBSupprDev, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selectDev3, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selectRoom3, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selectSite3, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBSupprIntercoDev, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectIntercoDev3, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jBAddDev, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
@@ -240,21 +204,17 @@ public class JFConfig extends javax.swing.JFrame {
                         .addComponent(jImgDev, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBSupprPc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(selectPc4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(selectRoom4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(selectSite4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBSupprDev, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(selectDev4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBAddPc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jImgPc)))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(selectNetCard5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBSupprCard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(selectSite5, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(selectRoom5, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(selectPc5, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(selectDev5, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(selectNC5, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBAddNetCard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jImgNetCard)
@@ -296,34 +256,23 @@ public class JFConfig extends javax.swing.JFrame {
                                 .addComponent(jBAddSite)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(113, 113, 113)
-                                .addComponent(selectNetCard5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                                .addComponent(jBSupprCard))
+                            .addComponent(jBSupprCard, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(selectSite2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectSite3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectSite5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectSite4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(selectIntercoDev3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(selectDev5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(selectDev4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(selectSite1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(selectRoom2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectRoom3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectRoom5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectRoom4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(selectNC5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(selectDev3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectPc5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectPc4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jBSupprDev)
+                                    .addComponent(jBSupprIntercoDev)
                                     .addComponent(jBSupprRoom)
-                                    .addComponent(jBSupprPc)))))
+                                    .addComponent(jBSupprDev)))))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSupprSite)))
@@ -355,30 +304,6 @@ public class JFConfig extends javax.swing.JFrame {
         selectRoom2.setModel(listSite);
     }//GEN-LAST:event_selectSite2ActionPerformed
 
-    private void selectSite3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSite3ActionPerformed
-        // TODO add your handling code here:
-        String siteName = (String)this.selectSite3.getSelectedItem();
-        DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
-        listRoom=DBMana.selectDBRoom(listRoom, siteName);
-        selectRoom3.setModel(listRoom);
-    }//GEN-LAST:event_selectSite3ActionPerformed
-
-    private void selectSite4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSite4ActionPerformed
-        // TODO add your handling code here:
-        String siteName = (String)this.selectSite4.getSelectedItem();
-        DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
-        listRoom=DBMana.selectDBRoom(listRoom, siteName);
-        selectRoom4.setModel(listRoom);
-    }//GEN-LAST:event_selectSite4ActionPerformed
-
-    private void selectSite5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSite5ActionPerformed
-        // TODO add your handling code here:
-        String siteName = (String)this.selectSite5.getSelectedItem();
-        DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
-        listRoom=DBMana.selectDBRoom(listRoom, siteName);
-        selectRoom5.setModel(listRoom);
-    }//GEN-LAST:event_selectSite5ActionPerformed
-
 
     private void jBAddDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddDevActionPerformed
         // TODO add your handling code here:
@@ -389,7 +314,7 @@ public class JFConfig extends javax.swing.JFrame {
 
     private void jBSupprCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprCardActionPerformed
       
-        String macAddr = (String)this.selectNetCard5.getSelectedItem();
+        String macAddr = (String)this.selectNC5.getSelectedItem();
         if(macAddr.isEmpty())
                 JOptionPane.showMessageDialog(null, "Veuillez d'abord selectionner une Carte réseau ");
         else
@@ -401,14 +326,6 @@ public class JFConfig extends javax.swing.JFrame {
   
     }//GEN-LAST:event_jBSupprCardActionPerformed
 
-    private void selectPc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectPc5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selectPc5ActionPerformed
-
-    private void selectNetCard5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNetCard5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selectNetCard5ActionPerformed
-
 
     private void jBSupprSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprSiteActionPerformed
         String site = (String)this.selectSite1.getSelectedItem();
@@ -417,14 +334,11 @@ public class JFConfig extends javax.swing.JFrame {
         else
         {
                 int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION)
-                     DBMana.supprSite(site);
+                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION){
+                    DBMana.supprSite(site);
+                }
         }   
     }//GEN-LAST:event_jBSupprSiteActionPerformed
-
-    private void selectSite1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSite1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selectSite1ActionPerformed
 
     private void jBSupprRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprRoomActionPerformed
         String room ;
@@ -441,6 +355,32 @@ public class JFConfig extends javax.swing.JFrame {
                      DBMana.supprRoom(numroom);
         }   
     }//GEN-LAST:event_jBSupprRoomActionPerformed
+
+    private void jBAddPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddPcActionPerformed
+        // TODO add your handling code here:
+        JFAddDev frameAddDev = new JFAddDev();
+        this.setVisible(false);
+        frameAddDev.setVisible(true);
+    }//GEN-LAST:event_jBAddPcActionPerformed
+
+    private void jBAddNetCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddNetCardActionPerformed
+        // TODO add your handling code here:
+        JFAddNetworkCard frameAddNC = new JFAddNetworkCard();
+        this.setVisible(false);
+        frameAddNC.setVisible(true);
+    }//GEN-LAST:event_jBAddNetCardActionPerformed
+
+    private void jBSupprIntercoDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprIntercoDevActionPerformed
+        // TODO add your handling code here:
+        String intercoDevName = (String)this.selectIntercoDev3.getSelectedItem();
+        int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION){
+                    DBMana.supprInterCoDevName(intercoDevName);
+                    DefaultComboBoxModel listIntercoDev = new DefaultComboBoxModel();
+                    listIntercoDev=DBMana.selectDBIntercoDev(listIntercoDev);
+                    selectIntercoDev3.setModel(listIntercoDev);
+                }
+    }//GEN-LAST:event_jBSupprIntercoDevActionPerformed
 
     /**
      * @param args the command line arguments
@@ -486,7 +426,7 @@ public class JFConfig extends javax.swing.JFrame {
     private javax.swing.JButton jBAddSite;
     private javax.swing.JButton jBSupprCard;
     private javax.swing.JButton jBSupprDev;
-    private javax.swing.JButton jBSupprPc;
+    private javax.swing.JButton jBSupprIntercoDev;
     private javax.swing.JButton jBSupprRoom;
     private javax.swing.JButton jBSupprSite;
     private javax.swing.JLabel jImgDev;
@@ -496,18 +436,12 @@ public class JFConfig extends javax.swing.JFrame {
     private javax.swing.JLabel jImgSite;
     private javax.swing.JLabel jLConf;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JComboBox selectDev3;
-    private javax.swing.JComboBox selectNetCard5;
-    private javax.swing.JComboBox selectPc4;
-    private javax.swing.JComboBox selectPc5;
+    private javax.swing.JComboBox selectDev4;
+    private javax.swing.JComboBox selectDev5;
+    private javax.swing.JComboBox selectIntercoDev3;
+    private javax.swing.JComboBox selectNC5;
     private javax.swing.JComboBox selectRoom2;
-    private javax.swing.JComboBox selectRoom3;
-    private javax.swing.JComboBox selectRoom4;
-    private javax.swing.JComboBox selectRoom5;
     private javax.swing.JComboBox selectSite1;
     private javax.swing.JComboBox selectSite2;
-    private javax.swing.JComboBox selectSite3;
-    private javax.swing.JComboBox selectSite4;
-    private javax.swing.JComboBox selectSite5;
     // End of variables declaration//GEN-END:variables
 }
