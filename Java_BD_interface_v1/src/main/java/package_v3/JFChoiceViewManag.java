@@ -43,6 +43,11 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
         jLWhatChoice.setText("Que souhaitez-vous faire ?");
 
         jBNetView.setText("Voir le réseau");
+        jBNetView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNetViewActionPerformed(evt);
+            }
+        });
 
         jBNetConfig.setText("Configurer le réseau");
         jBNetConfig.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +129,13 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_jBQuitActionPerformed
+
+    private void jBNetViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNetViewActionPerformed
+        // TODO add your handling code here:
+        TreeExample frameView = new TreeExample();
+        this.setVisible(false);
+        frameView.setVisible(true);
+    }//GEN-LAST:event_jBNetViewActionPerformed
 
     /**
      * @param args the command line arguments

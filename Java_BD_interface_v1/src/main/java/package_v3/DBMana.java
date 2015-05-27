@@ -82,44 +82,37 @@ public class DBMana {
     }
     
     //Paramétre le routeur auquel le Device est connecté, vérifie les adresses IP en donne une valide et stocke sur BDD
-    public static void setDBIPDevice(String IntercoDevName, String DevName){
+    public static String setDBIPDevice(String IntercoDevName, String DevName, String intName){
         String ipAddrDev; 
-        String ipAddrDB;
+        //String ipAddrDB;
         String ipAddrIntercoDev = "0.0.0.0";
         String check = "Novalue";
         boolean IPexist = true;
-        int i = 0;
-        String query = "SELECT IpAddr FROM Interfaces WHERE InterCoDevName ='"+IntercoDevName+"';";
-        String selectAllIP = "SELECT IpAddr FROM NetworkCards WHERE IntercoDevName = '"+IntercoDevName+"' ";
-        String insert;
-        
+        int i = 1;
+        String query = "SELECT IpAddr FROM Interfaces WHERE InterCoDevName ='"+IntercoDevName+"' AND IntName='"+intName+"';";
+        String selectAllIP = "SELECT IpAddr FROM NetworkCards WHERE IntercoDevName = '"+IntercoDevName+"'; ";
+        //String insert;
         rst = selectDB(query);
-        
         String IPregex = 
         "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
-
         Pattern pattern = Pattern.compile(IPregex);
         Matcher matcher;      
         try {
-            
             while (rst.next()){
                 ipAddrIntercoDev = rst.getString(1);
-
             }
-            
             matcher = pattern.matcher(ipAddrIntercoDev);
-            
             if (matcher.find()) 
                 ipAddrIntercoDev = matcher.group();
             else
                 ipAddrIntercoDev = "0.0.0.0";
-            
-            
-            ipAddrDev = ipAddrIntercoDev.substring( 0, ipAddrIntercoDev.length() -1);
-            
+            if(DBMana.isIntercoDevSwitch(IntercoDevName)){
+                ipAddrIntercoDev = selectDBIpSwitch(IntercoDevName);
                 
+                
+            }
+            ipAddrDev = ipAddrIntercoDev.substring( 0, ipAddrIntercoDev.length() -1);
             rst = selectDB(selectAllIP);     
-            
             while( (i<= 255) && IPexist ){
                 i++;
                 check = ipAddrDev + i;
@@ -128,26 +121,20 @@ public class DBMana {
                 }
                 rst.beforeFirst();
             }
-<<<<<<< HEAD
             System.out.println(IPexist);
             System.out.println(check);
-
-=======
             if(i==256){
-                i=1;
+                i=2;
                 check = ipAddrDev + i;              
-            }              
-            
-            insert = "UPDATE NetworkCards SET IpAddr = '"+check+"' WHERE DevName = '"+DevName+"';" ;
-            insertDB(insert);
+            }   
+            //insert = "UPDATE NetworkCards SET IpAddr = '"+check+"' WHERE DevName = '"+DevName+"';" ;
+            //insertDB(insert);
             System.out.println(ipAddrDev);
             System.out.println(check);
-            
->>>>>>> a5fe9ee42e4b67af44d6548c8cd627359c4164ae
         } catch (SQLException ex) {
             Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+        return check;
     }
     
     
@@ -311,6 +298,21 @@ public class DBMana {
             return IPHash;
 
     }
+    
+    public static String selectDBIpAddr (String interf, String intercoDev){
+        String query = "SELECT IpAddr FROM Interfaces WHERE IntName='"+interf+"' AND InterCoDevName='"+intercoDev+"'  ;" ;
+        rst = selectDB(query);
+        String ipAddr = "";
+        try {
+            while(rst.next()){
+                ipAddr=rst.getString(1);
+            } 	
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ipAddr;
+
+    }
 
     
     public static void AddDBRoom(Room room1){
@@ -455,6 +457,44 @@ public class DBMana {
                 listIntercoDev.addElement(result);		   
             }
             return listIntercoDev;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static boolean isIntercoDevSwitch(String intercoDev) {
+        try{
+            String query = "SELECT TypeIntercoDev FROM IntercoDev WHERE IntercoDevName='"+intercoDev+"'";
+            rst = selectDB(query);
+            String type="";
+            while (rst.next())
+            {
+                type = rst.getString(1);		   
+            }
+            if("Switch".equals(type)){
+                return true;
+            }
+            else
+                return false;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static String selectDBIpSwitch(String intercoDev) {
+        try{
+            String query = "SELECT IpAddr FROM Interfaces WHERE IntercoDevName='"+intercoDev+"' AND IntName='#1'";
+            rst = selectDB(query);
+            String ipAddr="";
+            while (rst.next())
+            {
+                ipAddr = rst.getString(1);		   
+            }
+            return ipAddr;
         }
         catch(SQLException e){
             e.printStackTrace();

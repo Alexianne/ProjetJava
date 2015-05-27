@@ -153,7 +153,7 @@ public class JFAuthentication extends javax.swing.JFrame {
             this.jLerr.setVisible(true);
         }
         else{
-            this.jLerr.setText("erreur identification");
+            this.jLerr.setText("Erreur d'identification !");
             this.jLerr.setVisible(true);
         }
         

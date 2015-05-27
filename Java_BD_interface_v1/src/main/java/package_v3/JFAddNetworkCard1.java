@@ -5,6 +5,7 @@
  */
 package package_v3;
 
+import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -21,6 +22,8 @@ public class JFAddNetworkCard1 extends javax.swing.JFrame {
      */
     public JFAddNetworkCard1(String devName) {
         initComponents();
+        this.jLerr.setVisible(false);
+        this.jLerr.setForeground(Color.red);
         this.devName=devName;
         DefaultComboBoxModel listConstr = new DefaultComboBoxModel();
         listConstr=DBMana.selectDBConstr(listConstr);
@@ -162,6 +165,7 @@ public class JFAddNetworkCard1 extends javax.swing.JFrame {
         String addrMac = debutMac+finMac;
         String intercoDev = (String)selectIntercoDev.getSelectedItem();
         String interf = (String)selectInt.getSelectedItem();
+        String ipAddress = "0.0.0.0";
         if(("".equals(finMac))){
             this.jLerr.setText("Vous avez oublié de remplir un champs");
             this.jLerr.setVisible(true);
@@ -174,8 +178,7 @@ public class JFAddNetworkCard1 extends javax.swing.JFrame {
                 this.jLerr.setVisible(true);
             }
             else{
-                String ipAddress = "0.0.0.0";
-                DBMana.setDBIPDevice(intercoDev);
+                ipAddress = DBMana.setDBIPDevice(intercoDev, devName, interf);
                 NetworkCard nc = new NetworkCard(devName, interf, intercoDev, addrMac, ipAddress);
                 DBMana.AddDBNC(nc);
                 String ip = DBMana.selectDBIpAddr(interf, intercoDev);

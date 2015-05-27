@@ -20,7 +20,7 @@ public class TreeExample extends JFrame
         Map<String, String> IPHash = new HashMap<>(); 
         IPHash = DBMana.selectDBMapIpInt();
                
-        String Site = "TBS";
+        String Site = "U2";
         //La racine = Site 
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(Site);
         
