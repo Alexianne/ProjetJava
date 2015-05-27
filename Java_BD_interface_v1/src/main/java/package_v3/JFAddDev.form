@@ -49,16 +49,16 @@
                           <Component id="jLRoom" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="selectTypeDev" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="jTDevName" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="selectOs" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="selectSite" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="selectRoom" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="selectRoom" alignment="1" max="32767" attributes="0"/>
+                          <Component id="selectSite" alignment="1" max="32767" attributes="0"/>
+                          <Component id="selectOs" alignment="1" max="32767" attributes="0"/>
+                          <Component id="selectTypeDev" alignment="1" pref="100" max="32767" attributes="0"/>
+                          <Component id="jTDevName" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <EmptySpace pref="71" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>

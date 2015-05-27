@@ -31,6 +31,7 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
         selectRoom.setModel(listRoom);
         DefaultComboBoxModel listIntercoDev = new DefaultComboBoxModel();
         listIntercoDev=DBMana.selectDBIntercoDev(listIntercoDev);
+        //listIntercoDev=DBMana.selectDBIntercoDev(listIntercoDev, "Routeur");
         selectIntercoDev.setModel(listIntercoDev);
         String intercoDev = (String)this.selectIntercoDev.getSelectedItem();
         DefaultComboBoxModel listInt = new DefaultComboBoxModel();
@@ -114,6 +115,12 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
         jLerr.setText("Texte d'erreur");
 
         jLIntercoDevName.setText("Nom d'équipement d'interco : ");
+
+        selectIntercoDev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectIntercoDevActionPerformed(evt);
+            }
+        });
 
         jLIntercoDev.setText("Connecté à :");
 
@@ -243,7 +250,10 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
                         this.setVisible(false);
                         break;
                     case "Switch":
-                        Interface port1 = new Interface("#1", intercoDevName, " ");
+                        String intercoDevCo = (String)this.selectIntercoDev.getSelectedItem();
+                        String intName = (String)this.selectInt.getSelectedItem();
+                        String ipAddr = DBMana.selectDBIpAddr(intName, intercoDevCo);
+                        Interface port1 = new Interface("#1", intercoDevName, ipAddr);
                         DBMana.AddDBInterface(port1);
                         Interface port2 = new Interface("#2", intercoDevName, " ");
                         DBMana.AddDBInterface(port2);
@@ -328,6 +338,14 @@ public class JFAddIntercoDev extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_selectTypeDevActionPerformed
+
+    private void selectIntercoDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectIntercoDevActionPerformed
+        // TODO add your handling code here:
+        String intercoDev = (String)this.selectIntercoDev.getSelectedItem();
+        DefaultComboBoxModel listInt = new DefaultComboBoxModel();
+        listInt=DBMana.selectDBInt(listInt, intercoDev);
+        selectInt.setModel(listInt);
+    }//GEN-LAST:event_selectIntercoDevActionPerformed
 
     /**
      * @param args the command line arguments

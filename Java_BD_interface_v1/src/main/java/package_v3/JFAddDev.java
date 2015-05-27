@@ -28,7 +28,7 @@ public class JFAddDev extends javax.swing.JFrame {
         DefaultComboBoxModel listRoom = new DefaultComboBoxModel();
         listRoom=DBMana.selectDBRoom(listRoom, siteName);
         selectRoom.setModel(listRoom);
-        String os = (String)this.selectOs.getSelectedItem();
+        String os = (String)this.selectTypeDev.getSelectedItem();
         if("Ordinateur".equals(os)){
             DefaultComboBoxModel listOs = new DefaultComboBoxModel();
             listOs.addElement("OS x");
@@ -133,13 +133,13 @@ public class JFAddDev extends javax.swing.JFrame {
                             .addComponent(jLSite)
                             .addComponent(jLRoom))
                         .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectTypeDev, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTDevName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(selectOs, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(selectSite, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(selectRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(91, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(selectRoom, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectSite, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectOs, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectTypeDev, javax.swing.GroupLayout.Alignment.TRAILING, 0, 100, Short.MAX_VALUE)
+                            .addComponent(jTDevName, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap(71, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jBOk)
@@ -192,7 +192,7 @@ public class JFAddDev extends javax.swing.JFrame {
 
     private void selectTypeDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectTypeDevActionPerformed
         // TODO add your handling code here:
-        String os = (String)this.selectOs.getSelectedItem();
+        String os = (String)this.selectTypeDev.getSelectedItem();
         if("Ordinateur".equals(os)){
             DefaultComboBoxModel listOs = new DefaultComboBoxModel();
             listOs.addElement("OS x");

@@ -181,6 +181,35 @@ public class DBMana {
             return NameIntercoDev;
         
     }
+    
+    public static ArrayList<String> getDBArrayInterface(String intercoDevName){
+        String query = "SELECT IntName FROM Interfaces WHERE IntercoDevName='"+intercoDevName+"' ;";
+            rst = selectDB(query);
+            boolean add = true ;
+            ArrayList<String> intName = new ArrayList<>();
+        try {
+            while(rst.next() && add){
+                add = intName.add(rst.getString(1));
+            } 			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return intName;
+    }
+    
+    public static String selectDBIpAddr(String intName, String intercoDevCo){
+        String query = "SELECT IpAddr FROM Interfaces WHERE IntercoDevName='"+intercoDevCo+"' AND IntName='"+intName+"'";
+        rst = selectDB(query);
+        String ipAddr="";
+        try {
+            while(rst.next()){
+                ipAddr=rst.getString(1);
+            } 			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ipAddr;
+    }
 
     
     public static void AddDBRoom(Room room1){
@@ -190,7 +219,7 @@ public class DBMana {
     }
     
     public static void AddDBIntercoDev(IntercoDev intercoDev){
-        String query = "INSERT INTO Devices VALUES ('"+intercoDev.getIntercoDevName()+"','"+intercoDev.getTypeIntercoDev()+"','"+intercoDev.getSiteName()+"','"+intercoDev.getNumRoom()+"')";
+        String query = "INSERT INTO IntercoDev VALUES ('"+intercoDev.getIntercoDevName()+"','"+intercoDev.getTypeIntercoDev()+"','"+intercoDev.getSiteName()+"','"+intercoDev.getNumRoom()+"')";
         insertDB(query);
         System.out.println("Périphérique bien ajouté ! ");
     }
@@ -207,7 +236,8 @@ public class DBMana {
         System.out.println("Interface bien ajouté ! ");
     }
     public static void UpdateDBInterface(Interface interf){
-        String query = "UPDATE Interfaces SET "+interf.getIpAddr()+" WHERE IntName="+interf.getIntName()+" AND IntercoDevName="+interf.getIntercoDevName();
+        String query = "UPDATE Interfaces SET IpAddr='"+interf.getIpAddr()+"' WHERE IntName='"+interf.getIntName()+"' AND IntercoDevName='"+interf.getIntercoDevName()+"'";
+        System.out.println("query : "+query);
         insertDB(query);
         System.out.println("Interface bien ajouté ! ");
     }
@@ -391,7 +421,7 @@ public class DBMana {
 
     public static boolean intercoDevExist(String intercoDevName) {
         try{
-            String query = "SELECT COUNT(*) FROM IntercoDev WHERE SiteName='"+intercoDevName+"'";
+            String query = "SELECT COUNT(*) FROM IntercoDev WHERE IntercoDevName='"+intercoDevName+"'";
             rst = selectDB(query);
             int result =0;
             while (rst.next())
@@ -478,10 +508,26 @@ public class DBMana {
             
     }
     
-    public static boolean supprInterCoDevName(String Name){
-            String query = "DELETE FROM IntercoDev WHERE InterCoDevName = '"+Name+"'; ";
-            supprNCInterCoDevName(Name);
+    public static boolean supprInterCoDevInterface(String intercoDevName, String intName){
+            String query = "DELETE FROM Interfaces WHERE InterCoDevName = '"+intercoDevName+"' AND IntName='"+intName+"' ";
             return insertDB(query);
+    }
+    
+    public static boolean supprInterCoDevName(String intercoDevName){
+            String query = "DELETE FROM IntercoDev WHERE InterCoDevName = '"+intercoDevName+"'; ";
+            insertDB(query);
+            supprNCInterCoDevName(intercoDevName);
+            String query2 = "SELECT IntName FROM Interfaces WHERE IntercoDevName='"+intercoDevName+"' ;";
+            rst = selectDB(query2);
+            boolean suppr = true ;
+            try {
+                while(rst.next() && suppr){
+                    suppr = supprInterCoDevInterface(intercoDevName, rst.getString(1));
+                } 			
+            } catch (SQLException ex) {
+                Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return suppr;
     }
     
     public static boolean supprInterCoDevRoom(int Room) {

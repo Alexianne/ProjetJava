@@ -7,6 +7,7 @@ package package_v3;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /**
  *
@@ -72,9 +73,9 @@ public class JFConfig extends javax.swing.JFrame {
         selectRoom2 = new javax.swing.JComboBox();
         jBSupprRoom = new javax.swing.JButton();
         selectIntercoDev3 = new javax.swing.JComboBox();
-        jBSupprDev = new javax.swing.JButton();
+        jBSupprIntercoDev = new javax.swing.JButton();
         selectDev4 = new javax.swing.JComboBox();
-        jBSupprPc = new javax.swing.JButton();
+        jBSupprDev = new javax.swing.JButton();
         selectDev5 = new javax.swing.JComboBox();
         selectNC5 = new javax.swing.JComboBox();
         jBSupprCard = new javax.swing.JButton();
@@ -150,9 +151,14 @@ public class JFConfig extends javax.swing.JFrame {
             }
         });
 
-        jBSupprDev.setText("Supprimer Equipement d'interco");
+        jBSupprIntercoDev.setText("Supprimer Equipement d'interco");
+        jBSupprIntercoDev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSupprIntercoDevActionPerformed(evt);
+            }
+        });
 
-        jBSupprPc.setText("Supprimer Equipement");
+        jBSupprDev.setText("Supprimer Equipement");
 
         jBSupprCard.setText("Supprimer Carte");
         jBSupprCard.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +195,7 @@ public class JFConfig extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jBSupprDev, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBSupprIntercoDev, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(selectIntercoDev3, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jBAddDev, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(30, 30, 30))
@@ -198,7 +204,7 @@ public class JFConfig extends javax.swing.JFrame {
                         .addComponent(jImgDev, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBSupprPc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBSupprDev, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(selectDev4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBAddPc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -250,9 +256,7 @@ public class JFConfig extends javax.swing.JFrame {
                                 .addComponent(jBAddSite)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBSupprCard))
+                            .addComponent(jBSupprCard, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(selectSite2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,9 +270,9 @@ public class JFConfig extends javax.swing.JFrame {
                                     .addComponent(selectNC5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jBSupprDev)
+                                    .addComponent(jBSupprIntercoDev)
                                     .addComponent(jBSupprRoom)
-                                    .addComponent(jBSupprPc)))))
+                                    .addComponent(jBSupprDev)))))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSupprSite)))
@@ -330,8 +334,9 @@ public class JFConfig extends javax.swing.JFrame {
         else
         {
                 int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION)
-                     DBMana.supprSite(site);
+                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION){
+                    DBMana.supprSite(site);
+                }
         }   
     }//GEN-LAST:event_jBSupprSiteActionPerformed
 
@@ -364,6 +369,18 @@ public class JFConfig extends javax.swing.JFrame {
         this.setVisible(false);
         frameAddNC.setVisible(true);
     }//GEN-LAST:event_jBAddNetCardActionPerformed
+
+    private void jBSupprIntercoDevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprIntercoDevActionPerformed
+        // TODO add your handling code here:
+        String intercoDevName = (String)this.selectIntercoDev3.getSelectedItem();
+        int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(option != JOptionPane.NO_OPTION &&  option != JOptionPane.CLOSED_OPTION){
+                    DBMana.supprInterCoDevName(intercoDevName);
+                    DefaultComboBoxModel listIntercoDev = new DefaultComboBoxModel();
+                    listIntercoDev=DBMana.selectDBIntercoDev(listIntercoDev);
+                    selectIntercoDev3.setModel(listIntercoDev);
+                }
+    }//GEN-LAST:event_jBSupprIntercoDevActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,7 +426,7 @@ public class JFConfig extends javax.swing.JFrame {
     private javax.swing.JButton jBAddSite;
     private javax.swing.JButton jBSupprCard;
     private javax.swing.JButton jBSupprDev;
-    private javax.swing.JButton jBSupprPc;
+    private javax.swing.JButton jBSupprIntercoDev;
     private javax.swing.JButton jBSupprRoom;
     private javax.swing.JButton jBSupprSite;
     private javax.swing.JLabel jImgDev;

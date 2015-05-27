@@ -148,13 +148,13 @@ public class JFAddRouterInterface extends javax.swing.JFrame {
         }
         else{
             Interface fa0 = new Interface("fa0/0", intercoDevName, ipAddrFa0);
-            DBMana.AddDBInterface(fa0);
+            DBMana.UpdateDBInterface(fa0);
             Interface fa1 = new Interface("fa0/1", intercoDevName, ipAddrFa1);
-            DBMana.AddDBInterface(fa1);
+            DBMana.UpdateDBInterface(fa1);
             Interface ser0 = new Interface("serial0/0/0", intercoDevName, ipAddrSer0);
-            DBMana.AddDBInterface(ser0);
+            DBMana.UpdateDBInterface(ser0);
             Interface ser1 = new Interface("serial0/1/0", intercoDevName, ipAddrSer1);
-            DBMana.AddDBInterface(ser1);
+            DBMana.UpdateDBInterface(ser1);
             JFAddOk addOk = new JFAddOk("routeur", "ajouté");
             addOk.setVisible(true);
             this.setVisible(false);

@@ -60,7 +60,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace pref="30" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jBSupprDev" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jBSupprIntercoDev" alignment="1" max="32767" attributes="0"/>
                           <Component id="selectIntercoDev3" alignment="1" max="32767" attributes="0"/>
                           <Component id="jBAddDev" alignment="1" max="32767" attributes="0"/>
                       </Group>
@@ -73,7 +73,7 @@
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jBSupprPc" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jBSupprDev" alignment="0" max="32767" attributes="0"/>
                   <Component id="selectDev4" alignment="0" max="32767" attributes="0"/>
                   <Component id="jBAddPc" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -141,10 +141,7 @@
                       </Group>
                       <EmptySpace pref="30" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="113" max="32767" attributes="0"/>
-                              <Component id="jBSupprCard" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jBSupprCard" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="selectSite2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -160,9 +157,9 @@
                               </Group>
                               <EmptySpace pref="49" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jBSupprDev" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jBSupprIntercoDev" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jBSupprRoom" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jBSupprPc" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jBSupprDev" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -305,10 +302,13 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jBSupprDev">
+    <Component class="javax.swing.JButton" name="jBSupprIntercoDev">
       <Properties>
         <Property name="text" type="java.lang.String" value="Supprimer Equipement d&apos;interco"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSupprIntercoDevActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="selectDev4">
       <Properties>
@@ -317,7 +317,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jBSupprPc">
+    <Component class="javax.swing.JButton" name="jBSupprDev">
       <Properties>
         <Property name="text" type="java.lang.String" value="Supprimer Equipement"/>
       </Properties>
