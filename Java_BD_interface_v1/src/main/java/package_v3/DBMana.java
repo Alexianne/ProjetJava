@@ -1,7 +1,10 @@
 package package_v3;
 
+import java.awt.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -78,16 +81,17 @@ public class DBMana {
         }
     }
     
-
-    public static void setDBIPDevice(String IntercoDevName){
-        String ipAddrDev = "Vide"; 
+    //Paramétre le routeur auquel le Device est connecté, vérifie les adresses IP en donne une valide et stocke sur BDD
+    public static void setDBIPDevice(String IntercoDevName, String DevName){
+        String ipAddrDev; 
         String ipAddrDB;
-        String ipAddrIntercoDev = "PbrlSQL";
+        String ipAddrIntercoDev = "0.0.0.0";
         String check = "Novalue";
         boolean IPexist = true;
         int i = 0;
         String query = "SELECT IpAddr FROM Interfaces WHERE InterCoDevName ='"+IntercoDevName+"';";
         String selectAllIP = "SELECT IpAddr FROM NetworkCards WHERE IntercoDevName = '"+IntercoDevName+"' ";
+        String insert;
         
         rst = selectDB(query);
         
@@ -95,8 +99,7 @@ public class DBMana {
         "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
 
         Pattern pattern = Pattern.compile(IPregex);
-        Matcher matcher;
-        
+        Matcher matcher;      
         try {
             
             while (rst.next()){
@@ -105,15 +108,17 @@ public class DBMana {
             }
             
             matcher = pattern.matcher(ipAddrIntercoDev);
-            if (matcher.find()) {
-            ipAddrIntercoDev = matcher.group();
-            }
-            else{
-            ipAddrIntercoDev = "0.0.0.0";
-            }
-          
+            
+            if (matcher.find()) 
+                ipAddrIntercoDev = matcher.group();
+            else
+                ipAddrIntercoDev = "0.0.0.0";
+            
+            
             ipAddrDev = ipAddrIntercoDev.substring( 0, ipAddrIntercoDev.length() -1);
-            rst = selectDB(selectAllIP);
+            
+                
+            rst = selectDB(selectAllIP);     
             
             while( (i<= 255) && IPexist ){
                 i++;
@@ -123,9 +128,22 @@ public class DBMana {
                 }
                 rst.beforeFirst();
             }
+<<<<<<< HEAD
             System.out.println(IPexist);
             System.out.println(check);
 
+=======
+            if(i==256){
+                i=1;
+                check = ipAddrDev + i;              
+            }              
+            
+            insert = "UPDATE NetworkCards SET IpAddr = '"+check+"' WHERE DevName = '"+DevName+"';" ;
+            insertDB(insert);
+            System.out.println(ipAddrDev);
+            System.out.println(check);
+            
+>>>>>>> a5fe9ee42e4b67af44d6548c8cd627359c4164ae
         } catch (SQLException ex) {
             Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -247,13 +265,12 @@ public class DBMana {
             rst = selectDB(query);
             boolean add = true ;
             ArrayList<String> DevName = new ArrayList<>();
+            
         try {
             while(rst.next() && add){
                 add = DevName.add(rst.getString(1));
             }
-             
-            
-            			
+          			
         } catch (SQLException ex) {
             Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -275,18 +292,23 @@ public class DBMana {
             return intName;
     }
     
-    public static String selectDBIpAddr(String intName, String intercoDevCo){
-        String query = "SELECT IpAddr FROM Interfaces WHERE IntercoDevName='"+intercoDevCo+"' AND IntName='"+intName+"'";
+    public static Map<String, String> selectDBMapIpInt (){
+        String query = "SELECT DevName, IpAddr FROM NetworkCards WHERE IpAddr IS NOT NULL  ;" ;
         rst = selectDB(query);
-        String ipAddr="";
+        boolean add = true ;
+        Map<String, String> IPHash = new HashMap<>();
+        
         try {
-            while(rst.next()){
-                ipAddr=rst.getString(1);
+            
+            while(rst.next() && add){
+                IPHash.put( rst.getString(1), rst.getString(2) );
             } 			
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return ipAddr;
+            return IPHash;
 
     }
 
