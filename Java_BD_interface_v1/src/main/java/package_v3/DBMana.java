@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 
 //connectDB();  Connexion à la BDD
@@ -76,6 +78,72 @@ public class DBMana {
             return macAddress;
         }
     }
+    
+    public static void setDBIPDevice(String IntercoDevName){
+        String ipAddrDev = "Vide"; 
+        String ipAddrDB;
+        String ipAddrIntercoDev = "PbrlSQL";
+        String check = "Novalue";
+        boolean IPexist = true;
+        int i = 0;
+        String query = "SELECT IpAddr FROM Interfaces WHERE InterCoDevName ='"+IntercoDevName+"';";
+        String selectAllIP = "SELECT IpAddr FROM NetworkCards WHERE IntercoDevName = '"+IntercoDevName+"' ";
+        
+        rst = selectDB(query);
+        
+        String IPregex = 
+        "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
+
+        Pattern pattern = Pattern.compile(IPregex);
+        Matcher matcher;
+        
+        try {
+            
+            while (rst.next()){
+                ipAddrIntercoDev = rst.getString(1);
+
+            }
+            
+            matcher = pattern.matcher(ipAddrIntercoDev);
+            if (matcher.find()) {
+            ipAddrIntercoDev = matcher.group();
+            }
+            else{
+            ipAddrIntercoDev = "0.0.0.0";
+            }
+          
+            ipAddrDev = ipAddrIntercoDev.substring( 0, ipAddrIntercoDev.length() -1);
+            rst = selectDB(selectAllIP);
+            
+            while( (i<= 255) && IPexist ){
+                    
+                i++;
+                check = ipAddrDev + i;
+                
+                while (rst.next() && IPexist ){
+                    
+                    IPexist = check.equals(rst.getString(1));
+                        
+                }
+                
+                rst.beforeFirst();
+                
+            }
+            
+            System.out.println(IPexist);
+            System.out.println(check);
+               
+            
+            
+  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+    
+    
     /*
     public static Integer getDBNumRoom(String Site)  {
         
@@ -164,6 +232,25 @@ public class DBMana {
             Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
         }
             return NameIntercoDev;
+        
+    }
+    
+    public static ArrayList<String> getDBArrayDevices(int Room){
+        String query = "SELECT DevName FROM Devices WHERE NumRoom='"+Room+"' ;";
+            rst = selectDB(query);
+            boolean add = true ;
+            ArrayList<String> DevName = new ArrayList<>();
+        try {
+            while(rst.next() && add){
+                add = DevName.add(rst.getString(1));
+            }
+             
+            
+            			
+        } catch (SQLException ex) {
+            Logger.getLogger(DBMana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return DevName;
         
     }
 
