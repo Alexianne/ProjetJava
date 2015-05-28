@@ -29,51 +29,60 @@ public class DBMana {
             return null;
         }
     }
-		
-    public static void AddDBRoom(Room room1){
-        try{
-            String query = "INSERT INTO Rooms VALUES ('"+room1.getSiteName()+"','"+room1.getNumRoom()+"','"+room1.getTypeRoom()+"')"; 
+	
+    /**
+     *
+     * @param query
+     * @return
+     */
+    public static ResultSet selectDB(String query){
+        try {
+            cnx = connectDB();
+            stat=cnx.createStatement();
+            rst = stat.executeQuery(query);
+        } 
+        catch (Exception e) {
+        }
+        return rst;
+     }
+     
+      public static boolean insertDB(String query){
+        try {
             cnx = connectDB();
             stat=cnx.createStatement();
             stat.executeUpdate(query);
-            System.out.println("Produit bien ajouté ! ");
+            return true;
+        } 
+        catch (Exception e) {
+            return false;
         }
-        catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
+    }
+    
+    
+    
+    public static void AddDBRoom(Room room1){
+        String query = "INSERT INTO Rooms VALUES ('"+room1.getSiteName()+"','"+room1.getNumRoom()+"','"+room1.getTypeRoom()+"')";
+        insertDB(query);
+        System.out.println("Produit bien ajouté ! ");
     }
 		
     public static void AddDBDev(Devices dev){
-        try{	
-            String query = "INSERT INTO Devices VALUES ('"+dev.getDevName()+"','"+dev.getTypeDev()+"','"+dev.getOS()+"','"+dev.getSiteName()+"','"+dev.getNumRoom()+"')"; 
-            cnx = connectDB();
-            stat=cnx.createStatement();
-            stat.executeUpdate(query);
-            System.out.println("Périphérique bien ajouté ! ");	
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
+        String query = "INSERT INTO Devices VALUES ('"+dev.getDevName()+"','"+dev.getTypeDev()+"','"+dev.getOS()+"','"+dev.getSiteName()+"','"+dev.getNumRoom()+"')";
+        insertDB(query);
+        System.out.println("Périphérique bien ajouté ! ");
     }
 
     public static void AddDBNC(NetworkCard nc){
-        try{
-            String query = "INSERT INTO NetworkCards VALUES ('"+nc.getDevName()+"','"+nc.getIntercoDevName()+"','"+nc.getMacAddr()+"','"+nc.getIpAddr()+"')"; 
-            cnx = connectDB();
-            stat=cnx.createStatement();
-            stat.executeUpdate(query);
-            System.out.println("Carte réseau bien ajoutée ! ");
-        }
-        catch(SQLException e){
-            System.out.println(e.getMessage());
-        }	
+        String query = "INSERT INTO NetworkCards VALUES ('"+nc.getDevName()+"','"+nc.getIntercoDevName()+"','"+nc.getMacAddr()+"','"+nc.getIpAddr()+"')";
+        insertDB(query);
+        System.out.println("Carte réseau bien ajoutée ! ");	
     }
-
+/*
     // A MODIFIER : setDBMacAddr(NetworkCard nc, String constr)
-    /*public static void setDBConstr(NetworkCard nc){
+    public static void setDBConstr(NetworkCard nc, String constr){
         try{
-            String temp = nc.getIdcard().substring(0, 6);
-            System.out.println(temp);
-            String query = "SELECT ConstrName FROM Constructeurs WHERE IDCard='"+temp+"'"; 
+            //String temp = nc.getDevName().substring(0, 6);
+            String query = "SELECT IDCard FROM Constructeurs WHERE ConstrName='"+constr+"'"; 
 
             cnx = connectDB();
             stat=cnx.createStatement();
@@ -84,8 +93,8 @@ public class DBMana {
                result = rst.getString(1);
 
             }
-            System.out.println(result);
-            nc.setConstr(result);
+            
+            nc.setMacAddr(result);
 
             String setconstr = "UPDATE NetworkCard SET Constr='"+nc.getConstr()+"' WHERE IDCard='"+nc.getIdcard()+"'  ";
             stat.execute(setconstr);
@@ -94,46 +103,38 @@ public class DBMana {
         catch(SQLException e){
             System.out.println(e.getMessage());
         }
-    }*/
-
-    public static Integer getDBNbRoom(Site site) {
-        try{
-            cnx=DBMana.connectDB();
-            stat=cnx.createStatement();
+    }
+*/
+    public static Integer getDBNbRoom(Site site) throws SQLException {
+        
             String query = "SELECT COUNT(*) FROM Rooms WHERE SiteName='"+site.getSiteName()+"'";
-            rst = cnx.createStatement().executeQuery(query);
+            rst = selectDB(query);
             int result =0;
             while (rst.next())
             {
                 result = rst.getInt(1);
             }			
             return result;
-        }catch(SQLException e){
-            e.printStackTrace();
-            return null;
-        }
+        
     }
 
 		
     public static void AddDBSite(Site site) {
         try{
-            cnx=connectDB();
-            stat=cnx.createStatement();
+            
             site.setNbRoom(getDBNbRoom(site));
             String query = "INSERT INTO Sites VALUES('"+site.getSiteName()+"','"+site.getAddress()+"')";
-            stat.execute(query);					
+            insertDB(query);
         }catch(SQLException e){
-            e.printStackTrace();
         }		
     }
                 
     public static DefaultComboBoxModel selectDBSite(DefaultComboBoxModel listSite) {
         try{
             String query = "SELECT SiteName FROM Sites";
-            cnx = DBMana.connectDB();
-            stat=cnx.createStatement();
-            rst = stat.executeQuery(query);
-            String result = null;
+            
+            rst = selectDB(query);
+            String result;
             while (rst.next())
             {
                 result = rst.getString(1);
@@ -143,17 +144,15 @@ public class DBMana {
             return listSite;
          }
          catch(SQLException e){
-            e.printStackTrace();
             return null;
         }
     }
 
     static boolean roomExist(String roomNum, String siteName) {
         try{
-            cnx=DBMana.connectDB();
-            stat=cnx.createStatement();
+            
             String query = "SELECT COUNT(*) FROM Rooms WHERE SiteName='"+siteName+"'";
-            rst = stat.executeQuery(query);
+            rst = selectDB(query);
             int result =0;
             while (rst.next())
             {
@@ -165,18 +164,14 @@ public class DBMana {
             }
             else{
                 String query2 = "SELECT COUNT(*) FROM Rooms WHERE NumRoom='"+roomNum+"'";
-                rst = stat.executeQuery(query2);
+                rst = selectDB(query2);
                 int result2 =0;
                 while (rst.next())
                 {
                    result2 = rst.getInt(1);
                 }
                 System.out.println(result2);
-                if(result2 == 0){
-                    return true;
-                }else{
-                    return false;
-                }
+                return result2 == 0;
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -187,10 +182,9 @@ public class DBMana {
     public static DefaultComboBoxModel selectDBRoom(DefaultComboBoxModel listSite, String siteName) {
         try{
             String query = "SELECT NumRoom FROM Rooms WHERE SiteName='"+siteName+"'";
-            cnx = DBMana.connectDB();
-            stat=cnx.createStatement();
-            rst = stat.executeQuery(query);
-            String result = null;
+            
+            rst = selectDB(query);
+            String result;
             while (rst.next())
             {
                 result = rst.getString(1);
@@ -204,5 +198,53 @@ public class DBMana {
             return null;
         }
     }
-	
+    
+    
+    public static boolean checkID(String login, String pass) throws SQLException{
+        String loginDB;
+        String passDB;
+        boolean check = false;
+        String query = "SELECT * FROM Users ;";
+        rst = selectDB(query);
+        
+        while (rst.next() && !(check))
+            {
+                loginDB = rst.getString(1);
+                passDB = rst.getString(2);
+                check = pass.equals(passDB) && login.equals(loginDB);
+            }
+        
+        return check;
+    }
+    
+    
+    public static boolean supprNCName(String DevName){
+            String query = "DELETE FROM NetworkCards WHERE DevName = '"+DevName+"' ";
+            return insertDB(query);
+            
+    }
+    
+    /**
+     *
+     * @param MacAddr
+     * @return
+     */
+    public static boolean supprNCMac(String MacAddr){
+            String query = "DELETE FROM NetworkCards WHERE MacAddr = '"+MacAddr+"' ";
+            return insertDB(query);
+            
+    }
+    
+    public static boolean supprInterCoDev(String Name){
+            String query = "DELETE FROM IntercoDev WHERE InterCoDevName = '"+Name+"' ";
+            return insertDB(query);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }

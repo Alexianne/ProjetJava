@@ -2,6 +2,13 @@ package package_v3;
 
 
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import static java.time.Clock.system;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 
@@ -25,6 +32,8 @@ public class JFAuthentication extends javax.swing.JFrame {
         this.jLerr.setVisible(false);
         this.jLerr.setForeground(Color.red);
     }
+    
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,7 +51,7 @@ public class JFAuthentication extends javax.swing.JFrame {
         jTId = new javax.swing.JTextField();
         jBOK = new javax.swing.JButton();
         jLerr = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jBQuit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTPwd = new javax.swing.JPasswordField();
 
@@ -65,10 +74,10 @@ public class JFAuthentication extends javax.swing.JFrame {
 
         jLerr.setText("Texte d'erreur");
 
-        jButton1.setText("Quitter");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBQuit.setText("Quitter");
+        jBQuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBQuitActionPerformed(evt);
             }
         });
 
@@ -105,7 +114,7 @@ public class JFAuthentication extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jBOK)
                 .addGap(27, 27, 27)
-                .addComponent(jButton1)
+                .addComponent(jBQuit)
                 .addGap(119, 119, 119))
         );
         layout.setVerticalGroup(
@@ -130,7 +139,7 @@ public class JFAuthentication extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBOK)
-                    .addComponent(jButton1))
+                    .addComponent(jBQuit))
                 .addContainerGap())
         );
 
@@ -147,31 +156,40 @@ public class JFAuthentication extends javax.swing.JFrame {
             this.jLerr.setText("autre erreur");
             this.jLerr.setVisible(true);
         }
-        String id = "Test";
-        String pwd = "pass";
+        
+        
         String idOK = jTId.getText();
         String pwdOK = jTPwd.getText();
-        if(idOK.equals(id)){
-            System.out.println("ok id");
-            if(pwdOK.equals(pwd)){
-                System.out.println("ok pwd");
+        
+        try {
+            if(DBMana.checkID(idOK, pwdOK)){
+                System.out.println("ID CHECK ");
                 JFChoiceViewManag frameChoice = new JFChoiceViewManag();
                 frameChoice.setVisible(true);
                 this.setVisible(false);
-                //Boss.closeWin();
+                //Boss.closeWin()
             }
             else{
-                System.out.println("erreur pwd");
+                System.out.println(idOK);
+                System.out.println(pwdOK);
+                System.out.println("erreur identification");
             }
-        }
-        else{
-            System.out.println("erreur id");
+        } catch (SQLException ex) {
+            Logger.getLogger(JFAuthentication.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBOKActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBQuitActionPerformed
+  
+        int option = JOptionPane.showConfirmDialog(null, "Voulez-vous quitter NetManag ?", "Arrêt en cours", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(option != JOptionPane.NO_OPTION && 
+            option != JOptionPane.CANCEL_OPTION && 
+            option != JOptionPane.CLOSED_OPTION){
+            System.exit(0);
+        }
+        
+        
+    }//GEN-LAST:event_jBQuitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,7 +231,7 @@ public class JFAuthentication extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBOK;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBQuit;
     private javax.swing.JLabel jLId;
     private javax.swing.JLabel jLIdentification;
     private javax.swing.JLabel jLPwd;

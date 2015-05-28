@@ -6,6 +6,7 @@
 package package_v3;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -160,7 +161,24 @@ public class JFConfig extends javax.swing.JFrame {
             }
         });
 
+        selectPc5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectPc5ActionPerformed(evt);
+            }
+        });
+
+        selectNetCard5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectNetCard5ActionPerformed(evt);
+            }
+        });
+
         jBSupprCard.setText("Supprimer Carte");
+        jBSupprCard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSupprCardActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +203,7 @@ public class JFConfig extends javax.swing.JFrame {
                     .addComponent(jBAddRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(selectSite2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(selectRoom2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBSupprRoom, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                    .addComponent(jBSupprRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
@@ -339,6 +357,28 @@ public class JFConfig extends javax.swing.JFrame {
         listSite=DBMana.selectDBRoom(listSite, siteName);
         selectRoom5.setModel(listSite);
     }//GEN-LAST:event_selectSite5ActionPerformed
+
+    private void jBSupprCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSupprCardActionPerformed
+      
+        int option = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr ?", "Suppression en cours", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(option != JOptionPane.NO_OPTION && 
+            option != JOptionPane.CANCEL_OPTION && 
+            option != JOptionPane.CLOSED_OPTION){
+            String macAddr = (String)this.selectNetCard5.getSelectedItem();
+            DBMana.supprNCMac(macAddr);
+        }
+        
+        
+        
+    }//GEN-LAST:event_jBSupprCardActionPerformed
+
+    private void selectPc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectPc5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectPc5ActionPerformed
+
+    private void selectNetCard5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNetCard5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectNetCard5ActionPerformed
 
     /**
      * @param args the command line arguments

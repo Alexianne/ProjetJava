@@ -1,5 +1,7 @@
 package package_v3;
 
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -32,7 +34,7 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
         jLWhatChoice = new javax.swing.JLabel();
         jBNetView = new javax.swing.JButton();
         jBNetConfig = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jBQuit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -49,7 +51,12 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Quitter");
+        jBQuit.setText("Quitter");
+        jBQuit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBQuitActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addPc.png"))); // NOI18N
 
@@ -79,7 +86,7 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jBQuit)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -94,7 +101,7 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBNetView)
-                    .addComponent(jButton1)
+                    .addComponent(jBQuit)
                     .addComponent(jBNetConfig))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -108,6 +115,15 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
        this.setVisible(false);
        frameConf.setVisible(true);
     }//GEN-LAST:event_jBNetConfigActionPerformed
+
+    private void jBQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBQuitActionPerformed
+        int option = JOptionPane.showConfirmDialog(null, "Voulez-vous quitter NetManag ?", "Arrêt en cours", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(option != JOptionPane.NO_OPTION && 
+            option != JOptionPane.CANCEL_OPTION && 
+            option != JOptionPane.CLOSED_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jBQuitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,7 +164,7 @@ public class JFChoiceViewManag extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBNetConfig;
     private javax.swing.JButton jBNetView;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBQuit;
     private javax.swing.JLabel jLWhatChoice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
